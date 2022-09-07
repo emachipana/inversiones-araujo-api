@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_165703) do
     t.string "email"
     t.integer "phone"
     t.string "address"
-    t.float "total"
+    t.float "total", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

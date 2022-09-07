@@ -7,7 +7,7 @@ class CreateQuotations < ActiveRecord::Migration[7.0]
       t.string :email
       t.integer :phone
       t.string :address
-      t.float :total
+      t.float :total, default: 0
 
       t.timestamps
     end
