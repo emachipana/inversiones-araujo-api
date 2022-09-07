@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_162154) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_163136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_162154) do
     t.string "marca"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unit_metric"
     t.index ["sub_category_id"], name: "index_products_on_sub_category_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
