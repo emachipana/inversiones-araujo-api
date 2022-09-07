@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_165703) do
     t.bigint "product_id", null: false
     t.bigint "quotation_id", null: false
     t.integer "quantity", default: 1
-    t.float "subtotal"
+    t.float "subtotal", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_quotation_details_on_product_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_165703) do
   end
 
   create_table "quotations", force: :cascade do |t|
-    t.integer "document_type"
+    t.integer "document_type", default: 0
     t.integer "document"
     t.string "client_name"
     t.string "email"
@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_165703) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.integer "document_type"
+    t.integer "document_type", default: 0
     t.integer "document"
     t.string "client_name"
     t.string "email"

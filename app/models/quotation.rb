@@ -1,5 +1,4 @@
 class Quotation < ApplicationRecord
-  validates :document_type, presence: true
   enum document_type: { 
     dni: 0,
     ruc: 1,
