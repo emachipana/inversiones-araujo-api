@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_151815) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_165703) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,18 +18,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_151815) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.bigint "sub_category_id", null: false
     t.bigint "user_id", null: false
-    t.integer "stock"
+    t.integer "stock", default: 0
     t.float "price"
     t.text "description"
     t.string "marca"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unit_metric"
     t.index ["sub_category_id"], name: "index_products_on_sub_category_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
@@ -37,8 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_151815) do
   create_table "quotation_details", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "quotation_id", null: false
-    t.integer "quantity"
-    t.float "subtotal"
+    t.integer "quantity", default: 1
+    t.float "subtotal", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_quotation_details_on_product_id"
@@ -46,13 +48,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_151815) do
   end
 
   create_table "quotations", force: :cascade do |t|
-    t.integer "document_type"
+    t.integer "document_type", default: 0
     t.integer "document"
     t.string "client_name"
     t.string "email"
     t.integer "phone"
     t.string "address"
-    t.float "total"
+    t.float "total", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -60,7 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_151815) do
   create_table "request_details", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "request_id", null: false
-    t.string "quantity"
+    t.integer "quantity", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_request_details_on_product_id"
@@ -68,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_151815) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.integer "document_type"
+    t.integer "document_type", default: 0
     t.integer "document"
     t.string "client_name"
     t.string "email"
@@ -85,10 +87,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_151815) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_sub_categories_on_category_id"
+    t.index ["name"], name: "index_sub_categories_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "user_type"
+    t.integer "user_type", default: 0
     t.string "username"
     t.string "name"
     t.string "password_digest"
