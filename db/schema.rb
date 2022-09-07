@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_151318) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_151613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_151318) do
     t.datetime "updated_at", null: false
     t.index ["sub_category_id"], name: "index_products_on_sub_category_id"
     t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "quotation_details", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "quotation_id", null: false
+    t.integer "quantity"
+    t.float "subtotal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_quotation_details_on_product_id"
+    t.index ["quotation_id"], name: "index_quotation_details_on_quotation_id"
   end
 
   create_table "quotations", force: :cascade do |t|
@@ -80,5 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_151318) do
 
   add_foreign_key "products", "sub_categories"
   add_foreign_key "products", "users"
+  add_foreign_key "quotation_details", "products"
+  add_foreign_key "quotation_details", "quotations"
   add_foreign_key "sub_categories", "categories"
 end
