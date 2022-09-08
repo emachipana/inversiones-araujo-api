@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :authorize, only: %i[ index ]
-  before_action :authorize, only: %i[ update ]
+  before_action :set_product, only: %i[ update destroy ]
   
   def index
     @products = Product.all
@@ -23,6 +23,11 @@ class ProductsController < ApplicationController
     else
       render json: { error: @product.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @product.destroy
+    head :ok
   end
 
   private
