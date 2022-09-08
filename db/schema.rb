@@ -24,7 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_165703) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.bigint "sub_category_id", null: false
-    t.bigint "user_id", null: false
     t.integer "stock", default: 0
     t.float "price"
     t.text "description"
@@ -33,7 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_165703) do
     t.datetime "updated_at", null: false
     t.string "unit_metric"
     t.index ["sub_category_id"], name: "index_products_on_sub_category_id"
-    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "quotation_details", force: :cascade do |t|
@@ -103,7 +101,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_165703) do
   end
 
   add_foreign_key "products", "sub_categories"
-  add_foreign_key "products", "users"
   add_foreign_key "quotation_details", "products"
   add_foreign_key "quotation_details", "quotations"
   add_foreign_key "request_details", "products"
