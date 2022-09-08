@@ -1,4 +1,9 @@
 class SubCategoriesController < ApplicationController
+  def index
+    @sub_categories = SubCategory.all
+    render json: @sub_categories
+  end
+  
   def create
     @sub_category = SubCategory.new(sub_category_params)
     if @sub_category.save
