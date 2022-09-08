@@ -13,4 +13,8 @@ Rails.application.routes.draw do
 
   # sub categories
   resources :sub_categories, except: %i[ show new edit ]
+
+  # products
+
+  resources :products, except: %i[ show new edit ]
 end
