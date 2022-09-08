@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   # profile
   get "/profile" => "users#show"
   patch "/profile" => "users#update"
+
+  # categories
+  resources :categories, except: %i[ show new edit ]
 end

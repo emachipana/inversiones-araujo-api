@@ -4,7 +4,6 @@ class Product < ApplicationRecord
   validates :description, presence: true
 
   belongs_to :sub_category
-  belongs_to :user
   has_many :quotation_details
   has_many :request_details
 end
