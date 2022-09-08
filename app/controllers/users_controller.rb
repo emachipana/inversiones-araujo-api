@@ -10,6 +10,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    render json: current_user.as_json(except: :password_digest)
+  end
+
   private
 
   def user_params
