@@ -4,13 +4,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-    @categories = @categories.map { |category|
-      { 
-        id: category.id,
-        name: category.name,
-        sub_categories: category.sub_categories.as_json(except: %i[ created_at updated_at category_id ])
-      }
-    }
+    @categories = @categories.map { |category| category.as_json.merge(sub_categories: category.sub_categories) }
     render json: @categories
   end
 
