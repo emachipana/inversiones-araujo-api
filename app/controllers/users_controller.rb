@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user.as_json(except: :password_digest), status: :created
     else
-      render json: { error: @user.errors.messages }, status: :unprocessable_entity
+      render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if current_user.update(user_params)
       render json: current_user.as_json(except: :password_digest)
     else
-      render json: { error: current_user.errors.messages }, status: :unprocessable_entity
+      render json: { error: current_user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
