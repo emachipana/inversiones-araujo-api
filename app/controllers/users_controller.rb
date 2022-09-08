@@ -14,6 +14,14 @@ class UsersController < ApplicationController
     render json: current_user.as_json(except: :password_digest)
   end
 
+  def update
+    if current_user.update(user_params)
+      render json: current_user.as_json(except: :password_digest)
+    else
+      render json: { error: current_user.errors.messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
