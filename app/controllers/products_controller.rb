@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :authorize, only: %i[ index ]
+  before_action :authorize, only: %i[ update ]
   
   def index
     @products = Product.all
@@ -16,10 +17,22 @@ class ProductsController < ApplicationController
     end
   end
 
+  def update
+    if @product.update(product_params)
+      render json: @product.as_json.merge(extract_categories_name(@product))
+    else
+      render json: { error: @product.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def product_params
     params.permit(:name, :sub_category_id, :stock, :price, :description, :marca, :unit_metric)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
   end
 
   def extract_categories_name(product)
