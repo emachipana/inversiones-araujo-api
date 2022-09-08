@@ -1,5 +1,5 @@
 class SubCategoriesController < ApplicationController
-  before_action :set_sub_category, only: %i[ update ]
+  before_action :set_sub_category, only: %i[ update destroy ]
   skip_before_action :authorize, only: %i[ index ]
 
   def index
@@ -22,6 +22,11 @@ class SubCategoriesController < ApplicationController
     else
       render json: { error: @sub_category.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @sub_category.destroy
+    head :ok
   end
 
   private
