@@ -10,4 +10,7 @@ Rails.application.routes.draw do
 
   # categories
   resources :categories, except: %i[ show new edit ]
+
+  # sub categories
+  resources :sub_categories, except: %i[ show new edit ]
 end
