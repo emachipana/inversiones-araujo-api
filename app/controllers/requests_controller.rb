@@ -1,8 +1,14 @@
 class RequestsController < ApplicationController
+  before_action :set_request, only: %i[ show destroy ]
+
   def index
     @requests = Request.all
-    @requests = @requests.map{ |request| request.as_json.merge(items: request.request_details) }
+    @requests = @requests.map{ |request| merge_items(request) }
     render json: @requests
+  end
+
+  def show
+    render json: merge_items(@request)
   end
 
   def create
@@ -27,7 +33,7 @@ class RequestsController < ApplicationController
         end
 
         if record.find { |el| el == false }.nil?
-          render json: @request.as_json.merge(items: @request.request_details)
+          render json: merge_items(@request)
         else
           @request.destroy
           render json: { error: [ "Something was wrong" ] }, status: :unprocessable_entity
@@ -39,7 +45,6 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    @request = Request.find(params[:id])
     @request.destroy
     head :ok
   end
@@ -50,4 +55,11 @@ class RequestsController < ApplicationController
     params.permit(:document_type, :document, :client_name, :email, :phone, :address, :message)
   end
 
+  def set_request
+    @request = Request.find(params[:id])
+  end
+
+  def merge_items(request)
+    request.as_json.merge(items: request.request_details)
+  end
 end
