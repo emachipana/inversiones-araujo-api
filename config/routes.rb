@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   # products
 
-  resources :products, except: %i[ show new edit ]
+  resources :products, except: %i[ new edit ]
 
   # requests
 
