@@ -1,5 +1,5 @@
 class QuotationsController < ApplicationController
-  before_action :set_quotation, only: %i[ show ]
+  before_action :set_quotation, only: %i[ show destroy ]
 
   def index
     @quotations = Quotation.all
@@ -43,6 +43,11 @@ class QuotationsController < ApplicationController
         render json: { error: @quotation.errors.full_messages }, status: :unprocessable_entity
       end
     end
+  end
+
+  def destroy
+    @quotation.destroy
+    head :ok
   end
 
   private
