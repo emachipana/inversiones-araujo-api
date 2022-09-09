@@ -1,17 +1,21 @@
 class ProductsController < ApplicationController
   skip_before_action :authorize, only: %i[ index ]
-  before_action :set_product, only: %i[ update destroy ]
+  before_action :set_product, only: %i[ update destroy show ]
   
   def index
     @products = Product.all
-    @products = @products.map { |product| product.as_json.merge(extract_categories_name(product)) }
+    @products = @products.map { |product| merge_categories_name(product) }
     render json: @products
+  end
+
+  def show
+    render json: merge_categories_name(@product)
   end
 
   def create
     @product = Product.new(product_params)
     if @product.save
-     render json: @product.as_json.merge(extract_categories_name(@product)) 
+     render json: merge_categories_name(@product) 
     else
       render json: { error: @product.errors.full_messages }, status: :unprocessable_entity
     end
@@ -19,7 +23,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      render json: @product.as_json.merge(extract_categories_name(@product))
+      render json: merge_categories_name(@product)
     else
       render json: { error: @product.errors.full_messages }, status: :unprocessable_entity
     end
@@ -40,10 +44,10 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def extract_categories_name(product)
-    {
+  def merge_categories_name(product)
+    product.as_json.merge({
       sub_category_name: product.sub_category.name,
       category_name: product.sub_category.category.name
-    }
+    })
   end
 end
