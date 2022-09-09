@@ -20,5 +20,5 @@ Rails.application.routes.draw do
 
   # requests
 
-  resources :requests, except: %i[ show new edit ]
+  resources :requests, except: %i[ show new edit update ]
 end

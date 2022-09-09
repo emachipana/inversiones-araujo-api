@@ -11,6 +11,7 @@ class RequestsController < ApplicationController
       render json: { error: [ "Items is required" ] }
     else
       if @request.save
+        record = []
         params[:items].each do |item|
           @request_detail = RequestDetail.new(
             request: @request,
@@ -19,15 +20,28 @@ class RequestsController < ApplicationController
           )
 
           if @request_detail.save
-            render json: @request.as_json.merge(items: @request.request_details)
+            record.push(true)
           else
-            render json: { error: @request_detail.errors.full_messages }
+            record.push(false)
           end
+        end
+
+        if record.find { |el| el == false }.nil?
+          render json: @request.as_json.merge(items: @request.request_details)
+        else
+          @request.destroy
+          render json: { error: [ "Something was wrong" ] }, status: :unprocessable_entity
         end
       else
         render json: { error: @request.errors.full_messages }, status: :unprocessable_entity
       end
     end
+  end
+
+  def destroy
+    @request = Request.find(params[:id])
+    @request.destroy
+    head :ok
   end
 
   private
