@@ -13,8 +13,8 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
-    if !params[:items] || params[:items].size == 0
-      render json: { error: [ "Items is required" ] }
+    if !params[:items] || params[:items].size.zero?
+      render json: { error: [ "Items is required" ] }, status: :unprocessable_entity
     else
       if @request.save
         record = []
@@ -25,11 +25,7 @@ class RequestsController < ApplicationController
             quantity: item["quantity"]
           )
 
-          if @request_detail.save
-            record.push(true)
-          else
-            record.push(false)
-          end
+          if @request_detail.save then record.push(true) else record.push(false) end
         end
 
         if record.find { |el| el == false }.nil?

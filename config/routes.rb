@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   # requests
 
   resources :requests, except: %i[ new edit update ]
+
+  # quotations
+
+  resources :quotations, except: %i[ new edit update ]
 end
