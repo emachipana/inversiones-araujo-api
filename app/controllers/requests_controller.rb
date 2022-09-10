@@ -1,5 +1,7 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: %i[ show destroy ]
+  skip_before_action :authorize, only: %i[ create ]
+  skip_before_action :validate_admin_user, only: %i[ create ]
 
   def index
     @requests = Request.all
