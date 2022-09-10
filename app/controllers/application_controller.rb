@@ -2,6 +2,7 @@ class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
   before_action :authorize
+  before_action :validate_admin_user
 
   def current_user
     @current_user ||= authenticate_token
@@ -9,6 +10,12 @@ class ApplicationController < ActionController::API
 
   def authorize
     authenticate_token || respond_unauthorized("Access denied")
+  end
+
+  def validate_admin_user
+    if current_user&.client?
+      respond_unauthorized("You have to be admin for this action")
+    end
   end
 
   private
