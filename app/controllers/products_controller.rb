@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  skip_before_action :authorize, only: %i[ index ]
+  skip_before_action :authorize, only: %i[ index show ]
+  skip_before_action :validate_admin_user, only: %i[ show ]
   before_action :set_product, only: %i[ update destroy show ]
   
   def index
