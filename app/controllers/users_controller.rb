@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authorize, only: :create
+  skip_before_action :validate_admin_user, only: %i[ show update ]
 
   def create
     @user = User.new(user_params)
@@ -25,6 +26,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:user_type, :name, :username, :password)
+    params.permit(:name, :username, :password)
   end
 end
