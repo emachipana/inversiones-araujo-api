@@ -48,7 +48,8 @@ class ProductsController < ApplicationController
   def merge_categories_name(product)
     product.as_json.merge({
       sub_category_name: product.sub_category.name,
-      category_name: product.sub_category.category.name
+      category_name: product.sub_category.category.name,
+      photos: product.photos
     })
   end
 end
