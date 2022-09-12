@@ -7,5 +7,6 @@ class CreatePhotos < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :photos, :public_id, unique: true
   end
 end
