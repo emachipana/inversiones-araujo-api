@@ -6,5 +6,5 @@ class Product < ApplicationRecord
   belongs_to :sub_category
   has_many :quotation_details, dependent: :nullify
   has_many :request_details, dependent: :nullify
-  has_many :phoyos, dependent: :destroy
+  has_many :photos, dependent: :destroy
 end
