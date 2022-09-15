@@ -9,12 +9,12 @@ class ApplicationController < ActionController::API
   end
 
   def authorize
-    authenticate_token || respond_unauthorized("Access denied")
+    authenticate_token || respond_unauthorized("Acceso denegado")
   end
 
   def validate_admin_user
     if current_user&.client?
-      respond_unauthorized("You have to be admin for this action")
+      respond_unauthorized("Tienes que ser administrador para realizar esta acción")
     end
   end
 
