@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       user.regenerate_token
       render json: user.as_json(except: :password_digest)
     else
-      respond_unauthorized("Incorrect email or password")
+      respond_unauthorized("Usuario o contraseña errados")
     end
   end
 
