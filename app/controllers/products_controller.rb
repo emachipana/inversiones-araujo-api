@@ -16,7 +16,16 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-     render json: merge_categories_name(@product) 
+      if params[:photo_url]
+        photo = Photo.new(url: params[:photo_url], product: @product)
+        if photo.save
+          render json: merge_categories_name(@product)
+        else
+          render json: { error: photo.errors.full_messages }, status: :unprocessable_entity
+        end
+      else
+        render json: { error: "Photo is required" }, status: :unprocessable_entity
+      end
     else
       render json: { error: @product.errors.full_messages }, status: :unprocessable_entity
     end
@@ -24,7 +33,15 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      render json: merge_categories_name(@product)
+      if params[:photo_url]
+        photo = Photo.find(params[:photo_id])
+
+        if photo.update(url: params[:photo_url])
+          render json: merge_categories_name(@product)
+        else
+          render json: { error: photo.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
     else
       render json: { error: @product.errors.full_messages }, status: :unprocessable_entity
     end
