@@ -22,13 +22,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_013515) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.string "public_id"
     t.string "url"
     t.bigint "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_photos_on_product_id"
-    t.index ["public_id"], name: "index_photos_on_public_id", unique: true
   end
 
   create_table "products", force: :cascade do |t|
@@ -97,6 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_013515) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_sub_categories_on_category_id"
+    t.index ["name", "category_id"], name: "index_sub_categories_on_name_and_category_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
