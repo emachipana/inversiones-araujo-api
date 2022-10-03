@@ -3,7 +3,7 @@ class SubCategoriesController < ApplicationController
   skip_before_action :authorize, only: %i[ index ]
 
   def index
-    @sub_categories = SubCategory.all
+    @sub_categories = SubCategory.all.sort_by{ |subCategory| subCategory[:id] }
     @sub_categories = @sub_categories.map{ |sub_category| merge_category(sub_category) }
     render json: @sub_categories
   end

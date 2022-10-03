@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ update destroy show ]
   
   def index
-    @products = Product.all
+    @products = Product.all.sort_by{ |product| product[:id] }
     @products = @products.map { |product| merge_categories_name(product) }
     render json: @products
   end
