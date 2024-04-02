@@ -6,22 +6,32 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('products', function (Blueprint $table) {
+      $table->id();
+      $table->string("name");
+      $table->text("description");
+      $table->float("price");
+      $table->integer("stock");
+      $table->boolean("is_active")->default(true);
+      $table->unsignedBigInteger("category_id");
+      $table->unsignedBigInteger("sub_category_id")->nullable();
+      $table->timestamps();
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('products');
-    }
+      $table->foreign("category_id")->references("id")->on("categories");
+      $table->foreign("sub_category_id")->references("id")->on("sub_categories");
+    });
+  }
+
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('products');
+  }
 };
