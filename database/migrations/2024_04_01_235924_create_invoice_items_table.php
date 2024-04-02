@@ -6,22 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('invoice_items', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('invoice_items', function (Blueprint $table) {
+      $table->id();
+      $table->unsignedBigInteger("invoice_id");
+      $table->unsignedBigInteger("product_id");
+      $table->integer("quantity");
+      $table->boolean("igv_is_apply")->default(true);
+      $table->float("price");
+      $table->float("sub_total");
+      $table->timestamps();
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('invoice_items');
-    }
+      $table->foreign("invoice_id")->references("id")->on("invoices");
+      $table->foreign("product_id")->references("id")->on("products");
+    });
+  }
+
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('invoice_items');
+  }
 };
