@@ -18,8 +18,8 @@ return new class extends Migration
       $table->string("first_name");
       $table->string("last_name")->nullable();
       $table->string("destination");
-      $table->string("crop_type");
-      $table->string("variety");
+      $table->float("price");
+      $table->unsignedBigInteger("variety_id");
       $table->integer("quantity");
       $table->float("total");
       $table->float("advance");
@@ -31,6 +31,7 @@ return new class extends Migration
       $table->unsignedBigInteger("image_id")->nullable();
       $table->timestamps();
 
+      $table->foreign("variety_id")->references("id")->on("varieties");
       $table->foreign("invoice_id")->references("id")->on("invoices");
       $table->foreign("image_id")->references("id")->on("images");
     });
