@@ -29,6 +29,7 @@ return new class extends Migration
       $table->integer("phone");
       $table->unsignedBigInteger("invoice_id")->nullable();
       $table->unsignedBigInteger("image_id")->nullable();
+      $table->string("status")->default("pending");
       $table->timestamps();
 
       $table->foreign("variety_id")->references("id")->on("varieties");
