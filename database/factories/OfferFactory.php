@@ -9,15 +9,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OfferFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
-        return [
-            //
-        ];
-    }
+  /**
+   * Define the model's default state.
+   *
+   * @return array<string, mixed>
+   */
+  public function definition(): array
+  {
+    return [
+      "title" => $this->faker->sentence(),
+      "sub_title" => $this->faker->sentence()
+    ];
+  }
 }
