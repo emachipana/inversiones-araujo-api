@@ -16,9 +16,9 @@ return new class extends Migration
       $table->unsignedBigInteger("client_id");
       $table->string("shipping_type");
       $table->string("pay_type");
-      $table->string("status");
+      $table->string("status")->default("pending");
       $table->float("total");
-      $table->unsignedBigInteger("invoice_id");
+      $table->unsignedBigInteger("invoice_id")->nullable();
       $table->timestamps();
 
       $table->foreign("client_id")->references("id")->on("clients");
