@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +10,19 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OrderFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
-        return [
-            //
-        ];
-    }
+  /**
+   * Define the model's default state.
+   *
+   * @return array<string, mixed>
+   */
+  public function definition(): array
+  {
+    return [
+      "client_id" => Client::factory(),
+      "shipping_type" => $this->faker->randomElement(["express", "normal", "coordinar"]),
+      "pay_type" => $this->faker->randomElement(["tarjeta", "deposito"]),
+      "status" => $this->faker->randomElement(["pending", "delivered"]),
+      "total" => $this->faker->randomFloat(2, 20, 900)
+    ];
+  }
 }

@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Offer;
-use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\OfferProduct>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tuber>
  */
-class OfferProductFactory extends Factory
+class TuberFactory extends Factory
 {
   /**
    * Define the model's default state.
@@ -19,8 +17,7 @@ class OfferProductFactory extends Factory
   public function definition(): array
   {
     return [
-      "offer_id" => Offer::factory(),
-      "product_id" => Product::factory()
+      "name" => $this->faker->randomElement(["papa", "camote", "olluco"])
     ];
   }
 }
