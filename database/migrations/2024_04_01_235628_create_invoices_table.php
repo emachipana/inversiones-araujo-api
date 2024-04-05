@@ -24,6 +24,7 @@ return new class extends Migration
       $table->dateTime("due_date");
       $table->string("comment")->nullable();
       $table->string("pdf_url");
+      $table->float("total")->default(0);
       $table->timestamps();
     });
   }
