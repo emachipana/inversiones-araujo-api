@@ -26,7 +26,8 @@ class InvoiceFactory extends Factory
       "issue_date" => $this->faker->dateTimeThisYear(),
       "due_date" => $this->faker->dateTimeThisYear(),
       "pdf_url" => $this->faker->url(),
-      "address" => $this->faker->streetAddress()
+      "address" => $this->faker->streetAddress(),
+      "total" => $this->faker->randomFloat(2, 20, 1000)
     ];
   }
 }
