@@ -7,5 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $fillable = [
+    "address",
+    "department",
+    "city",
+    "phone",
+    "receipt_type",
+    "document",
+    "document_type",
+    "first_name",
+    "last_name",
+    "email"
+  ];
+
+  public function orders() {
+    return $this->hasMany(Order::class);
+  }
+
+  public function user() {
+    return $this->hasOne(User::class);
+  }
 }
