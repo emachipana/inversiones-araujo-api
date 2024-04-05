@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tuber extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $fillable = [
+    "name"
+  ];
+
+  public function varieties() {
+    return $this->hasMany(Variety::class);
+  }
 }
