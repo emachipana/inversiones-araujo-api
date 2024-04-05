@@ -16,11 +16,12 @@ class ProductSeeder extends Seeder
   {
     $categories = Category::all();
 
+    // create 100 products
     for($i = 1; $i <= 100; $i++) {
       $category = $categories->random();
       $subCategory = $category->subCategories()->get()->random();
   
-      Product::factory()->count(1)->create([
+      Product::factory()->create([
         "category_id" => $category->id,
         "sub_category_id" => $subCategory->id
       ]);
