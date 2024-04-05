@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +22,7 @@ class EventFactory extends Factory
       "date" => $this->faker->dateTimeThisYear(),
       "description" => $this->faker->text(),
       "event_type" => $this->faker->randomElement(["invitro", "cotidiana"]),
-      "user_id" => User::factory()
+      "admin_id" => Admin::factory()
     ];
   }
 }

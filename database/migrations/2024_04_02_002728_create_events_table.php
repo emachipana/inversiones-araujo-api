@@ -17,10 +17,10 @@ return new class extends Migration
       $table->dateTime("date");
       $table->text("description");
       $table->string("event_type");
-      $table->unsignedBigInteger("user_id");
+      $table->unsignedBigInteger("admin_id");
       $table->timestamps();
 
-      $table->foreign("user_id")->references("id")->on("users");
+      $table->foreign("admin_id")->references("id")->on("admins");
     });
   }
 
