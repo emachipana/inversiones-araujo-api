@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
       UserSeeder::class,
       EventSeeder::class,
       OrderSeeder::class,
-      OrderProductSeeder::class
+      OrderProductSeeder::class,
+      MessageSeeder::class
     ]);
   }
 }
