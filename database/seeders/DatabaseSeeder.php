@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
       ImageSeeder::class,
       ProductImageSeeder::class,
       InvoiceSeeder::class,
-      InvoiceItemSeeder::class
+      InvoiceItemSeeder::class,
+      TuberSeeder::class
     ]);
   }
 }
