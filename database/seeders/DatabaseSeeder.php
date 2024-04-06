@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
       InvoiceItemSeeder::class,
       TuberSeeder::class,
       VitroOrderSeeder::class,
-      AdminSeeder::class
+      AdminSeeder::class,
+      ClientSeeder::class,
+      UserSeeder::class
     ]);
   }
 }
