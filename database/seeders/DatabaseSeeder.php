@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\ProductImage;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,7 +22,8 @@ class DatabaseSeeder extends Seeder
       VitroOrderSeeder::class,
       AdminSeeder::class,
       ClientSeeder::class,
-      UserSeeder::class
+      UserSeeder::class,
+      EventSeeder::class
     ]);
   }
 }
