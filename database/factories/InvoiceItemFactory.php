@@ -19,14 +19,14 @@ class InvoiceItemFactory extends Factory
   public function definition(): array
   {
     $quantity = $this->faker->numberBetween(2, 10);
-    $price = $this->faker->randomFloat(2, 10, 500);
+    $price = $this->faker->randomFloat(1, 10, 500);
 
     return [
       "invoice_id" => Invoice::factory(),
       "product_id" => Product::factory(),
       "quantity" => $quantity,
       "igv_is_apply" => $this->faker->randomElement([true, false]),
-      "price" => $quantity,
+      "price" => $price,
       "sub_total" => $quantity * $price
     ];
   }

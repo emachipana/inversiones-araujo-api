@@ -19,7 +19,7 @@ class DiscountFactory extends Factory
   {
     return [
       "product_id" => Product::factory(),
-      "price" => $this->faker->randomFloat(2, 5, 99),
+      "price" => $this->faker->randomFloat(1, 5, 99),
       "percentage" => $this->faker->numberBetween(10, 99)
     ];
   }

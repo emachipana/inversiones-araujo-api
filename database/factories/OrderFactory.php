@@ -22,7 +22,7 @@ class OrderFactory extends Factory
       "shipping_type" => $this->faker->randomElement(["express", "normal", "coordinar"]),
       "pay_type" => $this->faker->randomElement(["tarjeta", "deposito"]),
       "status" => $this->faker->randomElement(["pending", "delivered"]),
-      "total" => $this->faker->randomFloat(2, 20, 900)
+      "total" => $this->faker->randomFloat(1, 20, 900)
     ];
   }
 }
