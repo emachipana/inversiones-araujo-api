@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
       ProductSeeder::class,
       DiscountSeeder::class,
       ImageSeeder::class,
-      ProductImageSeeder::class
+      ProductImageSeeder::class,
+      InvoiceSeeder::class,
+      InvoiceItemSeeder::class
     ]);
   }
 }
