@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
       ProductImageSeeder::class,
       InvoiceSeeder::class,
       InvoiceItemSeeder::class,
-      TuberSeeder::class
+      TuberSeeder::class,
+      VitroOrderSeeder::class
     ]);
   }
 }
