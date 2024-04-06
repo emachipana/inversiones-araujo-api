@@ -19,12 +19,15 @@ class InvoiceItemSeeder extends Seeder
     $products = Product::all();
 
     $invoices->each(function ($invoice) use ($products) {
-      $product = $products->random();
+      
+      for($i = 1; $i <= 3; $i++) {
+        $product = $products->random();
 
-      InvoiceItem::factory()->count(3)->create([
-        "product_id" => $product->id,
-        "invoice_id" => $invoice->id
-      ]);
+        InvoiceItem::factory()->create([
+          "product_id" => $product->id,
+          "invoice_id" => $invoice->id
+        ]);
+      }
     });
   }
 }
