@@ -16,9 +16,11 @@ class InvoiceFactory extends Factory
    */
   public function definition(): array
   {
+    $invoice_type = $this->faker->randomElement(["factura", "boleta"]);
+
     return [
-      "invoice_type" => $this->faker->randomElement(["factura", "boleta"]),
-      "document_type" => $this->faker->randomElement(["dni", "ruc"]),
+      "invoice_type" => $invoice_type,
+      "document_type" => $invoice_type == "factura" ? "ruc" : "dni",
       "document" => $this->faker->randomNumber(8),
       "currency_type" => $this->faker->randomElement(["sol", "dolar americano"]),
       "first_name" => $this->faker->name(),
@@ -27,7 +29,7 @@ class InvoiceFactory extends Factory
       "due_date" => $this->faker->dateTimeThisYear(),
       "pdf_url" => $this->faker->url(),
       "address" => $this->faker->streetAddress(),
-      "total" => $this->faker->randomFloat(2, 20, 1000)
+      "total" => $this->faker->randomFloat(1, 20, 1000)
     ];
   }
 }

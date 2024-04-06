@@ -21,7 +21,7 @@ class ProductFactory extends Factory
     return [
       "name" => $this->faker->sentence(4),
       "description" => $this->faker->text(),
-      "price" => $this->faker->randomFloat(2, 100, 900),
+      "price" => $this->faker->randomFloat(1, 100, 900),
       "stock" => $this->faker->numberBetween(2, 50),
       "category_id" => Category::factory(),
       "sub_category_id" => SubCategory::factory()

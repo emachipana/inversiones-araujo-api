@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -20,7 +21,7 @@ class UserFactory extends Factory
     return [
       "client_id" => Client::factory(),
       "username" => $this->faker->email(),
-      "password" => $this->faker->password(6, 8)
+      "password" => Hash::make("cliente_test")
     ];
   }
 }
