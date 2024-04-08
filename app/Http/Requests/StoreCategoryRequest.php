@@ -11,7 +11,7 @@ class StoreCategoryRequest extends FormRequest
    */
   public function authorize(): bool
   {
-      return false;
+    return true; // hasta crear la logica de autenticacion
   }
 
   /**
@@ -21,8 +21,8 @@ class StoreCategoryRequest extends FormRequest
    */
   public function rules(): array
   {
-      return [
-          //
-      ];
+    return [
+      "name" => ["required"]
+    ];
   }
 }

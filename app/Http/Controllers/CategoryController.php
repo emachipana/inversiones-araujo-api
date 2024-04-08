@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -25,21 +26,13 @@ class CategoryController extends Controller
    */
   public function store(StoreCategoryRequest $request)
   {
-      //
+    return new CategoryResource(Category::create($request->all()));
   }
 
   /**
    * Display the specified resource.
    */
   public function show(Category $category)
-  {
-      //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(Category $category)
   {
       //
   }
