@@ -41,3 +41,17 @@ Route::apiResources([
   "messages" => MessageController::class,
   "visits" => VisitController::class
 ]);
+
+Route::apiResource("discounts", DiscountController::class)->except(["index", "show"]);
+
+Route::apiResource("offer_products", OfferProductController::class)->except(["index", "show"]);
+
+Route::apiResource("product_images", ProductImageController::class)->except(["index", "show"]);
+
+Route::apiResource("invoice_items", InvoiceItemController::class)->except(["index", "show"]);
+
+Route::apiResource("admins", AdminController::class)->only(["update"]);
+
+Route::apiResource("resets", ResetController::class)->except(["index", "update"]);
+
+Route::apiResource("order_products", OrderProductController::class)->except(["index", "show"]);
