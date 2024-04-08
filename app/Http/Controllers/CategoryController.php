@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -13,15 +15,9 @@ class CategoryController extends Controller
    */
   public function index()
   {
-      //
-  }
+    $categories = Category::with("subCategories")->get();
 
-  /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-      //
+    return new CategoryCollection($categories);
   }
 
   /**
