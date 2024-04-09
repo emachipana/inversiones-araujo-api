@@ -10,7 +10,7 @@ class JsonResponse {
 
     if(!$response->isRedirection() && !$response->isSuccessful()) {
       $response->setContent(json_encode([
-        "data" => $response->original
+        "data" => $response->isNotFound() ? "Registro no encontrado" : $response->original
       ]));
 
       $response->header("Content-Type", "application/json");
