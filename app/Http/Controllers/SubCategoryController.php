@@ -51,7 +51,9 @@ class SubCategoryController extends Controller
    */
   public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
   {
-      //
+    $subCategory->update($request->all());
+
+    return new SubCategoryResource($subCategory);
   }
 
   /**
@@ -59,6 +61,8 @@ class SubCategoryController extends Controller
    */
   public function destroy(SubCategory $subCategory)
   {
-      //
+    $subCategory->products()->update(["sub_category_id" => NULL]);
+
+    $subCategory->delete();
   }
 }

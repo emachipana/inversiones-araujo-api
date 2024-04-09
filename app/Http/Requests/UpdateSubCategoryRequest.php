@@ -11,7 +11,7 @@ class UpdateSubCategoryRequest extends FormRequest
    */
   public function authorize(): bool
   {
-    return false;
+    return true;
   }
 
   /**
@@ -21,8 +21,18 @@ class UpdateSubCategoryRequest extends FormRequest
    */
   public function rules(): array
   {
-    return [
-        //
-    ];
+    $method = $this->method();
+
+    if($method == "PATCH") {
+      return [
+        "category_id" => ["sometimes", "required"],
+        "name" => ["sometimes", "required"]
+      ];
+    }else { // PUT
+      return [
+        "category_id" => ["required"],
+        "name" => ["required"]
+      ];
+    }
   }
 }
