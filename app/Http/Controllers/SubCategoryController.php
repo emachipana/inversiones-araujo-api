@@ -4,24 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Http\Resources\SubCategoryCollection;
+use App\Http\Resources\SubCategoryResource;
+use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
-      //
-  }
+    $categoryName = $request->query("category");
+    $subCategories = SubCategory::all();
+    
+    if($categoryName) {
+      $category = Category::where("name", $categoryName)->first();
 
-  /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-      //
+      $subCategories  = $category ? SubCategory::where("category_id", $category->id)->get() : [];
+    }
+
+    return new SubCategoryCollection($subCategories);
   }
 
   /**
@@ -29,7 +35,7 @@ class SubCategoryController extends Controller
    */
   public function store(StoreSubCategoryRequest $request)
   {
-      //
+    return new SubCategoryResource(SubCategory::create($request->all()));
   }
 
   /**
@@ -37,15 +43,7 @@ class SubCategoryController extends Controller
    */
   public function show(SubCategory $subCategory)
   {
-      //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(SubCategory $subCategory)
-  {
-      //
+    return new SubCategoryResource($subCategory);
   }
 
   /**
@@ -53,7 +51,9 @@ class SubCategoryController extends Controller
    */
   public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
   {
-      //
+    $subCategory->update($request->all());
+
+    return new SubCategoryResource($subCategory);
   }
 
   /**
@@ -61,6 +61,8 @@ class SubCategoryController extends Controller
    */
   public function destroy(SubCategory $subCategory)
   {
-      //
+    $subCategory->products()->update(["sub_category_id" => NULL]);
+
+    $subCategory->delete();
   }
 }

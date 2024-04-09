@@ -18,7 +18,7 @@ return new class extends Migration
       $table->float("price");
       $table->integer("stock");
       $table->boolean("is_active")->default(true);
-      $table->unsignedBigInteger("category_id");
+      $table->unsignedBigInteger("category_id")->nullable();
       $table->unsignedBigInteger("sub_category_id")->nullable();
       $table->timestamps();
 

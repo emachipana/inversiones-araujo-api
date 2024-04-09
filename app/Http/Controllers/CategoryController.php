@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -13,15 +16,9 @@ class CategoryController extends Controller
    */
   public function index()
   {
-      //
-  }
+    $categories = Category::with("subCategories")->get();
 
-  /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-      //
+    return new CategoryCollection($categories);
   }
 
   /**
@@ -29,7 +26,7 @@ class CategoryController extends Controller
    */
   public function store(StoreCategoryRequest $request)
   {
-      //
+    return new CategoryResource(Category::create($request->all()));
   }
 
   /**
@@ -37,15 +34,7 @@ class CategoryController extends Controller
    */
   public function show(Category $category)
   {
-      //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(Category $category)
-  {
-      //
+    return new CategoryResource($category->loadMissing("subCategories"));
   }
 
   /**
@@ -53,7 +42,9 @@ class CategoryController extends Controller
    */
   public function update(UpdateCategoryRequest $request, Category $category)
   {
-      //
+    $category->update($request->all());
+
+    return new CategoryResource($category->loadMissing("subCategories"));
   }
 
   /**
@@ -61,6 +52,9 @@ class CategoryController extends Controller
    */
   public function destroy(Category $category)
   {
-      //
+    $category->products()->update(["category_id" => NULL, "sub_category_id" => NULL]);
+    $category->subCategories()->delete();
+
+    $category->delete();
   }
 }
