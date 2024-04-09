@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
 use App\Http\Resources\SubCategoryCollection;
+use App\Http\Resources\SubCategoryResource;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -33,7 +35,7 @@ class SubCategoryController extends Controller
    */
   public function store(StoreSubCategoryRequest $request)
   {
-      //
+    return new SubCategoryResource(SubCategory::create($request->all()));
   }
 
   /**
@@ -41,7 +43,7 @@ class SubCategoryController extends Controller
    */
   public function show(SubCategory $subCategory)
   {
-      //
+    return new SubCategoryResource($subCategory);
   }
 
   /**
