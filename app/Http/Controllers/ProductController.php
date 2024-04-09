@@ -6,6 +6,7 @@ use App\Filters\ProductFilter;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -24,19 +25,11 @@ class ProductController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-      //
-  }
-
-  /**
    * Store a newly created resource in storage.
    */
   public function store(StoreProductRequest $request)
   {
-      //
+    return new ProductResource(Product::create($request->all()));
   }
 
   /**
@@ -44,15 +37,7 @@ class ProductController extends Controller
    */
   public function show(Product $product)
   {
-      //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(Product $product)
-  {
-      //
+    
   }
 
   /**
