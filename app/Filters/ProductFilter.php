@@ -5,8 +5,11 @@ use App\Filters\ApiFilter;
 
 class ProductFilter extends ApiFilter {
   protected $safeParams = [
-    "min_price" => ["gte"],
-    "max_price" => ["lte"]
+    "min_price" => ["gte", "gt"],
+    "max_price" => ["lte", "lt"],
+    "category_id" => ["eq"],
+    "sub_category_id" => ["eq"],
+    "is_active" => ["eq"]
   ];
 
   protected $columnMap = [
@@ -16,6 +19,9 @@ class ProductFilter extends ApiFilter {
 
   protected $operatorMap = [
     "gte" => ">=",
-    "lte" => "<="
+    "lte" => "<=",
+    "eq" => "=",
+    "gt" => ">",
+    "lt" => "<"
   ];
 }
