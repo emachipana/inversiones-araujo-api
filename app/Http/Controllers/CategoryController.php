@@ -52,6 +52,9 @@ class CategoryController extends Controller
    */
   public function destroy(Category $category)
   {
-      //
+    $category->products()->update(["category_id" => NULL, "sub_category_id" => NULL]);
+    $category->subCategories()->delete();
+
+    $category->delete();
   }
 }
