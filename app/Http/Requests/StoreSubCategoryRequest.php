@@ -23,7 +23,7 @@ class StoreSubCategoryRequest extends FormRequest
   {
     return [
       "category_id" => ["required"],
-      "name" => ["required"]
+      "name" => ["required", "min:3"]
     ];
   }
 }
