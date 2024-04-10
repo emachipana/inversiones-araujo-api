@@ -30,4 +30,8 @@ class VitroOrder extends Model
   public function variety() {
     return $this->belongsTo(Variety::class);
   }
+
+  public function image() {
+    return $this->belongsTo(Image::class);
+  }
 }
