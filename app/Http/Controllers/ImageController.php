@@ -23,7 +23,7 @@ class ImageController extends Controller
    */
   public function store(StoreImageRequest $request)
   {
-  
+    return new ImageResource(Image::create($request->all()));
   }
 
   /**
@@ -39,7 +39,9 @@ class ImageController extends Controller
    */
   public function update(UpdateImageRequest $request, Image $image)
   {
-      //
+    $image->update($request->all());
+  
+    return new ImageResource($image);
   }
 
   /**
@@ -47,6 +49,10 @@ class ImageController extends Controller
    */
   public function destroy(Image $image)
   {
-      //
+    $image->productImage()->delete();
+    $image->vitroOrder()->update(["image_id" => NULL]);
+    $image->user()->update(["image_id" => NULL]);
+
+    $image->delete();
   }
 }
