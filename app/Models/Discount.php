@@ -13,4 +13,8 @@ class Discount extends Model
     "product_id",
     "price"
   ];
+
+  public function product() {
+    return $this->belongsTo(Product::class);
+  }
 }

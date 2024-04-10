@@ -20,11 +20,11 @@ class Product extends Model
   ];
 
   public function category() {
-    return $this->belongsTo(Category::class)->withDefault();
+    return $this->belongsTo(Category::class);
   }
 
   public function subCategory() {
-    return $this->belongsTo(SubCategory::class)->withDefault();
+    return $this->belongsTo(SubCategory::class);
   }
 
   public function discount() {

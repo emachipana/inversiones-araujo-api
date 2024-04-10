@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
       "description" => $this->description,
       "price" => $this->price,
       "stock" => $this->stock,
-      "is_active" => $this->is_active,
+      "is_active" => $this->is_active ?? 1,
       "category_id" => $this->category_id,
       "sub_category_id" => $this->sub_category_id,
       "images" => ProductImageResource::collection($this->whenLoaded("productImages")),

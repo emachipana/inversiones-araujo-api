@@ -37,7 +37,7 @@ class ProductController extends Controller
    */
   public function show(Product $product)
   {
-    
+    return new ProductResource($product->loadMissing("productImages"));
   }
 
   /**
@@ -45,7 +45,9 @@ class ProductController extends Controller
    */
   public function update(UpdateProductRequest $request, Product $product)
   {
-      //
+    $product->update($request->all());
+
+    return new ProductResource($product->loadMissing("productImages"));
   }
 
   /**
@@ -53,6 +55,12 @@ class ProductController extends Controller
    */
   public function destroy(Product $product)
   {
-      //
+    $product->discount()->delete();
+    $product->offerProducts()->delete();
+    $product->productImages()->delete();
+    $product->invoiceItems()->update(["product_id" => NULL]);
+    $product->orderProducts()->update(["product_id" => NULL]);
+
+    $product->delete();
   }
 }
