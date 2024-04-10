@@ -22,7 +22,8 @@ class OrderProductFactory extends Factory
       "order_id" => Order::factory(),
       "product_id" => Product::factory(),
       "quantity" => $this->faker->numberBetween(2, 50),
-      "sub_total" => $this->faker->randomFloat(1, 10, 1500)
+      "sub_total" => $this->faker->randomFloat(1, 10, 1500),
+      "product_name" => $this->faker->sentence(4)
     ];
   }
 }
