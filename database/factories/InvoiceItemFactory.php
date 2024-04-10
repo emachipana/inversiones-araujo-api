@@ -27,7 +27,8 @@ class InvoiceItemFactory extends Factory
       "quantity" => $quantity,
       "igv_is_apply" => $this->faker->randomElement([true, false]),
       "price" => $price,
-      "sub_total" => $quantity * $price
+      "sub_total" => $quantity * $price,
+      "product_name" => $this->faker->sentence(4)
     ];
   }
 }

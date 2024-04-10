@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\SubCategoryFilter;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
 use App\Http\Resources\SubCategoryCollection;
 use App\Http\Resources\SubCategoryResource;
-use App\Models\Category;
 use App\Models\SubCategory;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -18,14 +17,9 @@ class SubCategoryController extends Controller
    */
   public function index(Request $request)
   {
-    $categoryName = $request->query("category");
-    $subCategories = SubCategory::all();
-    
-    if($categoryName) {
-      $category = Category::where("name", $categoryName)->first();
-
-      $subCategories  = $category ? SubCategory::where("category_id", $category->id)->get() : [];
-    }
+    $filter = new SubCategoryFilter();
+    $queryItems = $filter->transform($request);
+    $subCategories = SubCategory::where($queryItems)->get();
 
     return new SubCategoryCollection($subCategories);
   }

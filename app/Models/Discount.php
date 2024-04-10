@@ -11,6 +11,11 @@ class Discount extends Model
 
   protected $fillable = [
     "product_id",
-    "price"
+    "price",
+    "percentage"
   ];
+
+  public function product() {
+    return $this->belongsTo(Product::class);
+  }
 }
