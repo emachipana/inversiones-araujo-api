@@ -20,4 +20,8 @@ class User extends Model
   public function resets() {
     return $this->hasMany(Reset::class);
   }
+
+  public function image() {
+    return $this->belongsTo(Image::class);
+  }
 }
