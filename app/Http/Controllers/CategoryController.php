@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -19,14 +17,6 @@ class CategoryController extends Controller
     $categories = Category::with("subCategories")->get();
 
     return new CategoryCollection($categories);
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   */
-  public function store(StoreCategoryRequest $request)
-  {
-    return new CategoryResource(Category::create($request->all()));
   }
 
   /**
