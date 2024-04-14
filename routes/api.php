@@ -26,7 +26,6 @@ use App\Http\Controllers\VitroOrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::apiResources([
-  "categories" => CategoryController::class,
   "sub_categories" => SubCategoryController::class,
   "products" => ProductController::class,
   "offers" => OfferController::class,
@@ -42,6 +41,8 @@ Route::apiResources([
   "messages" => MessageController::class,
   "visits" => VisitController::class
 ]);
+
+Route::apiResource("categories", CategoryController::class)->except(["store"]);
 
 Route::apiResource("discounts", DiscountController::class)->except(["index", "show"]);
 

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,10 +14,18 @@ class CategorySeeder extends Seeder
    */
   public function run(): void
   {
-    Category::factory()->count(5)->hasSubCategories(4)->create();
+    $list = ["campo", "invernadero", "laboratorio", "riego"];
 
-    Category::factory()->count(3)->hasSubCategories(2)->create();
+    foreach($list as $category) {
+      $newCategory = Category::create([
+        "name" => $category
+      ]);
 
-    Category::factory()->count(2)->hasSubCategories(1)->create();
+      for($i = 1; $i <= 3; $i++) {
+        SubCategory::factory()->create([
+          "category_id" => $newCategory->id
+        ]);
+      }
+    }
   }
 }
