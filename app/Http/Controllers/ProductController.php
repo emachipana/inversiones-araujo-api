@@ -21,7 +21,7 @@ class ProductController extends Controller
     $queryItems = $filter->transform($request);
     $products = Product::where($queryItems)->with("productImages");
 
-    return new ProductCollection($products->paginate(30)->appends($request->query()));
+    return new ProductCollection($products->paginate(20)->appends($request->query()));
   }
 
   /**
