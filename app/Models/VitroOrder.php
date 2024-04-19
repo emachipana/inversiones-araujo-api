@@ -34,4 +34,8 @@ class VitroOrder extends Model
   public function image() {
     return $this->belongsTo(Image::class);
   }
+
+  public function invoice() {
+    return $this->belongsTo(Invoice::class);
+  }
 }
