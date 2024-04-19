@@ -33,7 +33,7 @@ class VitroOrderResource extends JsonResource
       "phone" => $this->phone,
       "invoice" => $this->invoice,
       "image" => $this->image,
-      "status" => $this->status,
+      "status" => $this->status ?? "pending",
       "created_at" => $this->created_at,
       "updated_at" => $this->updated_at
     ];
