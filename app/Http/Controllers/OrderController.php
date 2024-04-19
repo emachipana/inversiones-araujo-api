@@ -40,7 +40,7 @@ class OrderController extends Controller
    */
   public function store(StoreOrderRequest $request)
   {
-      //
+    return new OrderResource(Order::create($request->all()));
   }
 
   /**
@@ -48,7 +48,9 @@ class OrderController extends Controller
   */
   public function update(UpdateOrderRequest $request, Order $order)
   {
-      //
+    $order->update($request->all());
+
+    return new OrderResource($order->loadMissing("orderProducts"));
   }
 
   /**
@@ -56,6 +58,8 @@ class OrderController extends Controller
    */
   public function destroy(Order $order)
   {
-      //
+    $order->orderProducts()->delete();
+
+    $order->delete();
   }
 }
