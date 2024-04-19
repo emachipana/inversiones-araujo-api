@@ -17,6 +17,8 @@ class VitroOrder extends Model
     "destination",
     "variety_id",
     "price",
+    "total",
+    "pending",
     "quantity",
     "advance",
     "init_date",
