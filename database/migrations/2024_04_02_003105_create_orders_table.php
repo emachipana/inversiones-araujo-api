@@ -19,6 +19,7 @@ return new class extends Migration
       $table->string("status")->default("pending");
       $table->float("total")->default(0);
       $table->unsignedBigInteger("invoice_id")->nullable();
+      $table->string("destination");
       $table->timestamps();
 
       $table->foreign("client_id")->references("id")->on("clients");

@@ -14,7 +14,8 @@ class Order extends Model
     "shipping_type",
     "pay_type",
     "status",
-    "invoice_id"
+    "invoice_id",
+    "destination"
   ];
 
   public function orderProducts() {
