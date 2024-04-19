@@ -28,14 +28,16 @@ class UpdateOrderRequest extends FormRequest
         "client_id" => ["sometimes", "required"],
         "shipping_type" => ["sometimes" ,"required", "min:3"],
         "pay_type" => ["sometimes" ,"required", "min:3"],
-        "destination" => ["sometimes" ,"required", "min:3"]
+        "destination" => ["sometimes" ,"required", "min:3"],
+        "invoice_id" => ["sometimes"]
       ];
     }else { // PUT
       return [
         "client_id" => ["required"],
         "shipping_type" => ["required", "min:3"],
         "pay_type" => ["required", "min:3"],
-        "destination" => ["required", "min:3"]
+        "destination" => ["required", "min:3"],
+        "invoice_id" => ["sometimes"]
       ];
     } 
   }

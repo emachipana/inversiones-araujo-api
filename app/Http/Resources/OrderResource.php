@@ -21,7 +21,7 @@ class OrderResource extends JsonResource
       "pay_type" => $this->pay_type,
       "status" => $this->status,
       "total" => $this->total,
-      "invoice_id" => $this->invoice_id,
+      "invoice" => $this->invoice,
       "destination" => $this->destination,
       "created_at" => $this->created_at,
       "updated_at" => $this->updated_at,
