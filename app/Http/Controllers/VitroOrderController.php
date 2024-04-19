@@ -6,6 +6,7 @@ use App\Filters\VitroOrderFilter;
 use App\Http\Requests\StoreVitroOrderRequest;
 use App\Http\Requests\UpdateVitroOrderRequest;
 use App\Http\Resources\VitroOrderCollection;
+use App\Http\Resources\VitroOrderResource;
 use App\Models\VitroOrder;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,26 @@ class VitroOrderController extends Controller
    */
   public function store(StoreVitroOrderRequest $request)
   {
-      //
+    $data = $request->all();
+    $total = $data["price"] * $data["quantity"];
+    $pending = $total - $data["advance"];
+
+    return new VitroOrderResource(VitroOrder::create([
+      "document" => $data["document"],
+      "document_type" => $data["document_type"],
+      "first_name" => $data["first_name"],
+      "last_name" => $data["last_name"],
+      "destination" => $data["destination"],
+      "price" => $data["price"],
+      "variety_id" => $data["variety_id"],
+      "quantity" => $data["quantity"],
+      "advance" => $data["advance"],
+      "total" => $total,
+      "pending" => $pending,
+      "init_date" => $data["init_date"],
+      "finish_date" => $data["finish_date"],
+      "phone" => $data["phone"]
+    ]));
   }
 
   /**
@@ -36,7 +56,7 @@ class VitroOrderController extends Controller
    */
   public function show(VitroOrder $vitroOrder)
   {
-      //
+    return new VitroOrderResource($vitroOrder);
   }
 
   /**
