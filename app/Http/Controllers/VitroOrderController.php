@@ -33,22 +33,10 @@ class VitroOrderController extends Controller
     $total = $data["price"] * $data["quantity"];
     $pending = $total - $data["advance"];
 
-    return new VitroOrderResource(VitroOrder::create([
-      "document" => $data["document"],
-      "document_type" => $data["document_type"],
-      "first_name" => $data["first_name"],
-      "last_name" => $data["last_name"],
-      "destination" => $data["destination"],
-      "price" => $data["price"],
-      "variety_id" => $data["variety_id"],
-      "quantity" => $data["quantity"],
-      "advance" => $data["advance"],
-      "total" => $total,
-      "pending" => $pending,
-      "init_date" => $data["init_date"],
-      "finish_date" => $data["finish_date"],
-      "phone" => $data["phone"]
-    ]));
+    $data["total"] = $total;
+    $data["pending"] = $pending;
+
+    return new VitroOrderResource(VitroOrder::create($data));
   }
 
   /**
@@ -64,7 +52,15 @@ class VitroOrderController extends Controller
    */
   public function update(UpdateVitroOrderRequest $request, VitroOrder $vitroOrder)
   {
-      //
+    $data = $request->all();
+    
+    if($data["advance"]) {
+      $data["pending"] = $vitroOrder->total - $data["advance"];
+    }
+
+    $vitroOrder->update($data);
+
+    return new VitroOrderResource($vitroOrder);
   }
 
   /**
@@ -72,6 +68,6 @@ class VitroOrderController extends Controller
    */
   public function destroy(VitroOrder $vitroOrder)
   {
-      //
+    $vitroOrder->delete();
   }
 }
