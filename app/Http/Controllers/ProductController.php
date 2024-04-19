@@ -19,7 +19,9 @@ class ProductController extends Controller
   {
     $filter = new ProductFilter();
     $queryItems = $filter->transform($request);
-    $products = Product::where($queryItems)->with("productImages");
+    $products = Product::where($queryItems)
+                  ->with("productImages")
+                  ->orderBy("created_at", "desc");
 
     return new ProductCollection($products->paginate(20)->appends($request->query()));
   }
