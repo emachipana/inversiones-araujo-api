@@ -17,6 +17,8 @@ class VitroOrder extends Model
     "destination",
     "variety_id",
     "price",
+    "total",
+    "pending",
     "quantity",
     "advance",
     "init_date",
@@ -33,5 +35,9 @@ class VitroOrder extends Model
 
   public function image() {
     return $this->belongsTo(Image::class);
+  }
+
+  public function invoice() {
+    return $this->belongsTo(Invoice::class);
   }
 }

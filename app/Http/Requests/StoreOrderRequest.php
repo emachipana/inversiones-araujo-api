@@ -25,7 +25,8 @@ class StoreOrderRequest extends FormRequest
       "client_id" => ["required"],
       "shipping_type" => ["required", "min:3"],
       "pay_type" => ["required", "min:3"],
-      "destination" => ["required", "min:3"]
+      "destination" => ["required", "min:3"],
+      "invoice_id" => ["sometimes"]
     ];
   }
 }
