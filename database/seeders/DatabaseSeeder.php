@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
       InvoiceSeeder::class,
       InvoiceItemSeeder::class,
       TuberSeeder::class,
-      VitroOrderSeeder::class,
       AdminSeeder::class,
       ClientSeeder::class,
       UserSeeder::class,
