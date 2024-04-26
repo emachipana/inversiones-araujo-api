@@ -14,6 +14,14 @@ class OfferResource extends JsonResource
    */
   public function toArray(Request $request): array
   {
-    return parent::toArray($request);
+    return [
+      "id" => $this->id,
+      "title" => $this->title,
+      "sub_title" => $this->sub_title,
+      "is_used" => $this->is_used ?? 0,
+      "products" => OfferProductResource::collection($this->whenLoaded("offerProducts")),
+      "created_at" => $this->created_at,
+      "updated_at" => $this->updated_at
+    ];
   }
 }
