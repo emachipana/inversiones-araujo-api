@@ -3,26 +3,40 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateOfferRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
+  /**
+   * Determine if the user is authorized to make this request.
+   */
+  public function authorize(): bool
+  {
+    return true;
+  }
+
+  /**
+   * Get the validation rules that apply to the request.
+   *
+   * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+   */
+  public function rules(): array
+  {
+    $method = $this->method();
+
+    if($method == "PATCH") {
+      return [
+        "title" => ["sometimes", "required", "min:5"],
+        "sub_title" => ["sometimes", "required", "min:5"],
+        "is_used" => ["sometimes", "required", Rule::in([1, 0])]
+      ];
+    }else { // PUT
+      return [
+        "title" => ["required", "min:5"],
+        "sub_title" => ["required", "min:5"],
+        "is_used" => ["required", Rule::in([1, 0])]
+      ];
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
-    {
-        return [
-            //
-        ];
-    }
+  }
 }

@@ -25,7 +25,7 @@ class OfferController extends Controller
    */
   public function store(StoreOfferRequest $request)
   {
-    //
+    return new OfferResource(Offer::create($request->all()));
   }
 
   /**
@@ -41,7 +41,9 @@ class OfferController extends Controller
    */
   public function update(UpdateOfferRequest $request, Offer $offer)
   {
-      //
+    $offer->update($request->all());
+
+    return new OfferResource($offer);
   }
 
   /**
@@ -49,6 +51,8 @@ class OfferController extends Controller
    */
   public function destroy(Offer $offer)
   {
-      //
+    $offer->offerProducts()->delete();
+
+    $offer->delete();
   }
 }
