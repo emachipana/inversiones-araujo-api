@@ -15,8 +15,8 @@ class Variety extends Model
     "tuber_id"
   ];
 
-  public function vitroOrders() {
-    return $this->hasMany(VitroOrder::class);
+  public function orderVarieties() {
+    return $this->hasMany(OrderVariety::class);
   }
 
   public function tuber() {
