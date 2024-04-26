@@ -18,9 +18,6 @@ return new class extends Migration
       $table->string("first_name");
       $table->string("last_name")->nullable();
       $table->string("destination");
-      $table->float("price");
-      $table->unsignedBigInteger("variety_id");
-      $table->integer("quantity");
       $table->float("total");
       $table->float("advance");
       $table->float("pending");
@@ -32,7 +29,6 @@ return new class extends Migration
       $table->string("status")->default("pending");
       $table->timestamps();
 
-      $table->foreign("variety_id")->references("id")->on("varieties");
       $table->foreign("invoice_id")->references("id")->on("invoices");
       $table->foreign("image_id")->references("id")->on("images");
     });
