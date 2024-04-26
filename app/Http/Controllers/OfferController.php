@@ -4,63 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\UpdateOfferRequest;
+use App\Http\Resources\OfferCollection;
+use App\Http\Resources\OfferResource;
 use App\Models\Offer;
 
 class OfferController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  /**
+   * Display a listing of the resource.
+   */
+  public function index()
+  {
+    $offers = Offer::with("offerProducts")->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    return new OfferCollection($offers);
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreOfferRequest $request)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(StoreOfferRequest $request)
+  {
+    //
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Offer $offer)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   */
+  public function show(Offer $offer)
+  {
+    return new OfferResource($offer->loadMissing("offerProducts"));
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Offer $offer)
-    {
-        //
-    }
+  /**
+   * Update the specified resource in storage.
+   */
+  public function update(UpdateOfferRequest $request, Offer $offer)
+  {
+      //
+  }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateOfferRequest $request, Offer $offer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Offer $offer)
-    {
-        //
-    }
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(Offer $offer)
+  {
+      //
+  }
 }
