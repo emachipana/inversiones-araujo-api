@@ -30,7 +30,7 @@ class UpdateProductRequest extends FormRequest
         "description" => ["sometimes", "required", "min:10"],
         "price" => ["sometimes", "required", "numeric"],
         "stock" => ["sometimes", "required", "numeric"],
-        "category_id" => ["sometimes", "required"],
+        "category_id" => ["sometimes"],
         "sub_category_id" => ["sometimes"],
         "is_active" => ["sometimes", Rule::in([1, 0])]
       ];
@@ -40,7 +40,7 @@ class UpdateProductRequest extends FormRequest
         "description" => ["required", "min:10"],
         "price" => ["required", "numeric"],
         "stock" => ["required", "numeric"],
-        "category_id" => ["required"],
+        "category_id" => ["sometimes"],
         "sub_category_id" => ["sometimes"],
         "is_active" => ["required", Rule::in([1, 0])]
       ];
