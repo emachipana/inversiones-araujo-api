@@ -12,20 +12,20 @@ class DatabaseSeeder extends Seeder
   {
     $this->call([
       CategorySeeder::class,
-      ProductSeeder::class,
-      DiscountSeeder::class,
-      ImageSeeder::class,
-      ProductImageSeeder::class,
-      InvoiceSeeder::class,
-      InvoiceItemSeeder::class,
-      TuberSeeder::class,
+      // ProductSeeder::class,
+      // DiscountSeeder::class,
+      // ImageSeeder::class,
+      // ProductImageSeeder::class,
+      // InvoiceSeeder::class,
+      // InvoiceItemSeeder::class,
+      // TuberSeeder::class,
       AdminSeeder::class,
-      ClientSeeder::class,
+      // ClientSeeder::class,
       UserSeeder::class,
-      EventSeeder::class,
-      OrderSeeder::class,
-      OrderProductSeeder::class,
-      MessageSeeder::class
+      // EventSeeder::class,
+      // OrderSeeder::class,
+      // OrderProductSeeder::class,
+      // MessageSeeder::class
     ]);
   }
 }

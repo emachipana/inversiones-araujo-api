@@ -42,7 +42,7 @@ Route::apiResources([
   "visits" => VisitController::class
 ]);
 
-Route::apiResource("categories", CategoryController::class)->except(["store"]);
+Route::apiResource("categories", CategoryController::class)->only(["index", "show"]);
 
 Route::apiResource("discounts", DiscountController::class)->except(["index", "show"]);
 
