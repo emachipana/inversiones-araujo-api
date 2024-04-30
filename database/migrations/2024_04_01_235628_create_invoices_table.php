@@ -21,7 +21,7 @@ return new class extends Migration
       $table->string("last_name")->nullable();
       $table->text("address");
       $table->dateTime("issue_date");
-      $table->dateTime("due_date");
+      $table->dateTime("due_date")->nullable();
       $table->string("comment")->nullable();
       $table->string("pdf_url");
       $table->float("total")->default(0);

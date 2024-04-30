@@ -18,7 +18,7 @@ return new class extends Migration
       $table->string("first_name");
       $table->string("last_name")->nullable();
       $table->string("destination");
-      $table->float("total");
+      $table->float("total")->default(0);
       $table->float("advance");
       $table->float("pending");
       $table->dateTime("init_date");
