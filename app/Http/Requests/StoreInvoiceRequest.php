@@ -33,7 +33,8 @@ class StoreInvoiceRequest extends FormRequest
       "issue_date" => ["required", "date"],
       "due_date" => ["required", "sometimes", "date"],
       "comment" => ["required", "sometimes", "min:3"],
-      "pdf_url" => ["required"]
+      "pdf_url" => ["required"],
+      "total" => ["required", "numeric"]
     ];
   }
 }

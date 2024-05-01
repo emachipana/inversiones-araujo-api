@@ -4,63 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreInvoiceItemRequest;
 use App\Http\Requests\UpdateInvoiceItemRequest;
+use App\Http\Resources\InvoiceItemResource;
 use App\Models\InvoiceItem;
 
 class InvoiceItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(StoreInvoiceItemRequest $request)
+  {
+    return new InvoiceItemResource(InvoiceItem::create($request->all()));
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  /**
+   * Update the specified resource in storage.
+   */
+  public function update(UpdateInvoiceItemRequest $request, InvoiceItem $invoiceItem)
+  {
+    $invoiceItem->update($request->all());
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreInvoiceItemRequest $request)
-    {
-        //
-    }
+    return new InvoiceItemResource($invoiceItem);
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(InvoiceItem $invoiceItem)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(InvoiceItem $invoiceItem)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateInvoiceItemRequest $request, InvoiceItem $invoiceItem)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(InvoiceItem $invoiceItem)
-    {
-        //
-    }
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(InvoiceItem $invoiceItem)
+  {
+    $invoiceItem->delete();
+  }
 }

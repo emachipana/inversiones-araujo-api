@@ -33,7 +33,8 @@ class UpdateInvoiceRequest extends FormRequest
       "issue_date" => ["required", "sometimes", "date"],
       "due_date" => ["required", "sometimes", "date"],
       "comment" => ["required", "sometimes", "min:3"],
-      "pdf_url" => ["required", "sometimes"]
+      "pdf_url" => ["required", "sometimes"],
+      "total" => ["required", "sometimes", "numeric"]
     ];
   }
 }
