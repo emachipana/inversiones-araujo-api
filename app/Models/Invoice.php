@@ -20,7 +20,8 @@ class Invoice extends Model
     "due_date",
     "comment",
     "pdf_url",
-    "address"
+    "address",
+    "total"
   ];
 
   public function vitroOrder() {
