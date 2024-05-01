@@ -27,7 +27,7 @@ class InvoiceResource extends JsonResource
       "due_date" => $this->due_date,
       "comment" => $this->comment,
       "pdf_url" => $this->pdf_url,
-      "total" => $this->total ?? 0,
+      "total" => $this->total,
       "document_type" => $this->document_type,
       "items" => InvoiceItemResource::collection($this->whenLoaded("invoiceItems")),
       "created_at" => $this->created_at,
