@@ -4,63 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTuberRequest;
 use App\Http\Requests\UpdateTuberRequest;
+use App\Http\Resources\TuberCollection;
+use App\Http\Resources\TuberResource;
 use App\Models\Tuber;
 
 class TuberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  /**
+   * Display a listing of the resource.
+   */
+  public function index()
+  {
+    $tubers = Tuber::with("varieties")->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    return new TuberCollection($tubers);
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTuberRequest $request)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(StoreTuberRequest $request)
+  {
+    return new TuberResource(Tuber::create($request->all()));
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tuber $tuber)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   */
+  public function show(Tuber $tuber)
+  {
+    return new TuberResource($tuber->loadMissing("varieties"));
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tuber $tuber)
-    {
-        //
-    }
+  /**
+   * Update the specified resource in storage.
+   */
+  public function update(UpdateTuberRequest $request, Tuber $tuber)
+  {
+    $tuber->update($request->all());
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateTuberRequest $request, Tuber $tuber)
-    {
-        //
-    }
+    return new TuberResource($tuber->loadMissing("varieties"));
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tuber $tuber)
-    {
-        //
-    }
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(Tuber $tuber)
+  {
+    $tuber->varieties()->update(["tuber_id" => NULL]);
+    $tuber->delete();
+  }
 }
