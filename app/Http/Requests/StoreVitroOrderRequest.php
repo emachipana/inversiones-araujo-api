@@ -27,12 +27,9 @@ class StoreVitroOrderRequest extends FormRequest
       "first_name" => ["required", "min:3"],
       "last_name" => ["sometimes", "min:3"],
       "destination" => ["required"],
-      "price" => ["required", "numeric"],
-      "variety_id" => ["required"],
-      "quantity" => ["required", "numeric"],
       "advance" => ["required", "numeric"],
-      "init_date" => ["required"],
-      "finish_date" => ["required"],
+      "init_date" => ["required", "date"],
+      "finish_date" => ["required", "date"],
       "phone" => ["required", "numeric"]
     ];
   }
