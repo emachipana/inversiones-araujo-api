@@ -18,6 +18,7 @@ return new class extends Migration
       $table->float("price");
       $table->integer("quantity");
       $table->float("sub_total");
+      $table->string("variety_name");
       $table->timestamps();
 
       $table->foreign("vitro_order_id")->references("id")->on("vitro_orders");
