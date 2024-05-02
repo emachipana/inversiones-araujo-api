@@ -20,7 +20,9 @@ class VitroOrderController extends Controller
     $filter = new VitroOrderFilter();
 
     $queryItems = $filter->transform($request);
-    $vitroOrders = VitroOrder::where($queryItems)->orderBy("created_at", "desc");
+    $vitroOrders = VitroOrder::where($queryItems)
+                    ->with("orderVarieties")
+                    ->orderBy("created_at", "desc");
 
     return new VitroOrderCollection($vitroOrders->paginate(18)->appends($request->query()));
   }
@@ -38,7 +40,7 @@ class VitroOrderController extends Controller
    */
   public function show(VitroOrder $vitroOrder)
   {
-    return new VitroOrderResource($vitroOrder);
+    return new VitroOrderResource($vitroOrder->loadMissing("orderVarieties"));
   }
 
   /**
@@ -54,7 +56,7 @@ class VitroOrderController extends Controller
 
     $vitroOrder->update($data);
 
-    return new VitroOrderResource($vitroOrder);
+    return new VitroOrderResource($vitroOrder->loadMissing("orderVarieties"));
   }
 
   /**
