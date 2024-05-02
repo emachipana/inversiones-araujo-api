@@ -14,7 +14,8 @@ class OrderVariety extends Model
     "vitro_order_id",
     "price",
     "quantity",
-    "sub_total"
+    "sub_total",
+    "variety_name"
   ];
 
   public function vitroOrder() {

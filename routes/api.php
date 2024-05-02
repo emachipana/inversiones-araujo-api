@@ -14,6 +14,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OfferProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderProductController;
+use App\Http\Controllers\OrderVarietyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ResetController;
@@ -51,6 +52,8 @@ Route::apiResource("offer_products", OfferProductController::class)->except(["in
 Route::apiResource("product_images", ProductImageController::class)->except(["index", "show"]);
 
 Route::apiResource("invoice_items", InvoiceItemController::class)->except(["index", "show"]);
+
+Route::apiResource("order_varieties", OrderVarietyController::class)->except(["index", "show"]);
 
 Route::apiResource("admins", AdminController::class)->only(["update"]);
 

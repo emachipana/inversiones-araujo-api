@@ -28,6 +28,7 @@ class VitroOrderResource extends JsonResource
       "finish_date" => $this->finish_date,
       "phone" => $this->phone,
       "invoice" => $this->invoice,
+      "varieties" => OrderVarietyResource::collection($this->whenLoaded("orderVarieties")),
       "image" => $this->image,
       "status" => $this->status ?? "pending",
       "created_at" => $this->created_at,
