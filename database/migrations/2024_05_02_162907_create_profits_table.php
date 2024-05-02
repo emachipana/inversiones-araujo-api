@@ -11,15 +11,16 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('admins', function (Blueprint $table) {
+    Schema::create('profits', function (Blueprint $table) {
       $table->id();
-      $table->text("business_description")->nullable();
-      $table->string("business_keywords")->nullable();
-      $table->string("first_name");
-      $table->string("last_name");
-      $table->string("email");
-      $table->float("total_profit")->default(0);
+      $table->string("month");
+      $table->float("expenses");
+      $table->float("income");
+      $table->float("profit");
+      $table->unsignedBigInteger("admin_id");
       $table->timestamps();
+      
+      $table->foreign("admin_id")->references("id")->on("admins");
     });
   }
 
@@ -28,6 +29,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('admins');
+    Schema::dropIfExists('profits');
   }
 };

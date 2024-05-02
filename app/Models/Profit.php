@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expense extends Model
+class Profit extends Model
 {
   use HasFactory;
 
   protected $fillable = [
-    "name",
-    "price",
-    "quantity",
-    "sub_total"
+    "month",
+    "expenses",
+    "income",
+    "profit"
   ];
 
-  public function profit() {
-    return $this->belongsTo(Profit::class);
+  public function expenses() {
+    return $this->hasMany(Expense::class);
   }
 }

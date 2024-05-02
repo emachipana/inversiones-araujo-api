@@ -17,10 +17,10 @@ return new class extends Migration
       $table->float("price");
       $table->integer("quantity");
       $table->float("sub_total");
-      $table->unsignedBigInteger("admin_id");
+      $table->unsignedBigInteger("profit_id");
       $table->timestamps();
 
-      $table->foreign("admin_id")->references("id")->on("admins");
+      $table->foreign("profit_id")->references("id")->on("profits");
     });
   }
 
