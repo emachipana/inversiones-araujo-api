@@ -45,7 +45,13 @@ class VarietyController extends Controller
    */
   public function update(UpdateVarietyRequest $request, Variety $variety)
   {
-    $variety->update($request->all());
+    $data = $request->all();
+
+    if(isset($data["name"])) {
+      $variety->orderVarieties()->update(["variety_name" => $data["name"]]);
+    }
+
+    $variety->update($data);
 
     return new VarietyResource($variety);
   }
