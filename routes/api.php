@@ -55,7 +55,7 @@ Route::apiResource("invoice_items", InvoiceItemController::class)->except(["inde
 
 Route::apiResource("order_varieties", OrderVarietyController::class)->except(["index", "show"]);
 
-Route::apiResource("admins", AdminController::class)->only(["update"]);
+Route::apiResource("admins", AdminController::class)->only(["update", "show"]);
 
 Route::apiResource("resets", ResetController::class)->except(["index", "update"]);
 
