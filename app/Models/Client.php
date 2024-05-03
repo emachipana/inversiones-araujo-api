@@ -16,7 +16,7 @@ class Client extends Model
     "phone",
     "receipt_type",
     "document",
-    "document_type",
+    "consumption",
     "first_name",
     "last_name",
     "email"
