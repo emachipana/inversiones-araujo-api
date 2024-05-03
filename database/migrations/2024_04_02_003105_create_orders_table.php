@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('orders', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger("client_id");
+      $table->unsignedBigInteger("client_id")->nullable();
       $table->string("shipping_type");
       $table->string("pay_type");
       $table->string("status")->default("pending");
