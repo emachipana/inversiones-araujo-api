@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreResetRequest extends FormRequest
+class CheckResetRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StoreResetRequest extends FormRequest
   public function rules(): array
   {
     return [
-      "user_id" => ["required"]
+      "code" => ["required", "min:5"]
     ];
   }
 }

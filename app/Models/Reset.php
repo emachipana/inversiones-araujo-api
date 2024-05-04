@@ -10,7 +10,8 @@ class Reset extends Model
   use HasFactory;
 
   protected $fillable = [
-    "user_id"
+    "user_id",
+    "code"
   ];
 
   public function user() {

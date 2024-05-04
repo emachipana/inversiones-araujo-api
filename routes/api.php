@@ -57,14 +57,22 @@ Route::apiResource("order_varieties", OrderVarietyController::class)->except(["i
 
 Route::apiResource("admins", AdminController::class)->only(["update", "show"]);
 
-Route::apiResource("resets", ResetController::class)->except(["index", "update"]);
-
 Route::apiResource("order_products", OrderProductController::class)->except(["index", "show"]);
 
 Route::group(["prefix" => "auth"], function () {
   Route::controller(AuthController::class)->group(function () {
     Route::post("/login", "login");
-
+    
     Route::post("/signup", "signup");
+  });
+});
+
+Route::group(["prefix" => "resets"], function () {
+  Route::controller(ResetController::class)->group(function () {
+    Route::post("/", "store");
+    
+    Route::delete("/{reset}", "destroy");
+
+    Route::post("/check/{reset}", "check");
   });
 });
