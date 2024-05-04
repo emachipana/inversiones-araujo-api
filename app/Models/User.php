@@ -24,4 +24,12 @@ class User extends Model
   public function image() {
     return $this->belongsTo(Image::class);
   }
+
+  public function client() {
+    return $this->belongsTo(Client::class);
+  }
+
+  public function admin() {
+    return $this->belongsTo(Admin::class);
+  }
 }
