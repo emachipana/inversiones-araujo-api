@@ -2,65 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\EventFilter;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Http\Resources\EventCollection;
+use App\Http\Resources\EventResource;
 use App\Models\Event;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  protected function getMonth($date) {
+    $month = Carbon::parse($date);
+    $month->locale("es");
+    return $month->translatedFormat("F");
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  /**
+   * Display a listing of the resource.
+   */
+  public function index(Request $request)
+  {
+    $filter = new EventFilter();
+    $queryItems = $filter->transform($request);
+    $events = Event::where($queryItems)->orderBy("date", "asc")->get();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreEventRequest $request)
-    {
-        //
-    }
+    return new EventCollection($events);
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Event $event)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(StoreEventRequest $request)
+  {
+    $data = $request->all();
+    $data["month"] = $this->getMonth($data["date"]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event)
-    {
-        //
-    }
+    return new EventResource(Event::create($data));
+  }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateEventRequest $request, Event $event)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   */
+  public function show(Event $event)
+  {
+    return new EventResource($event);
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Event $event)
-    {
-        //
-    }
+  /**
+   * Update the specified resource in storage.
+   */
+  public function update(UpdateEventRequest $request, Event $event)
+  {
+    $data = $request->all();
+    if(isset($data["date"])) $data["month"] = $this->getMonth($data["date"]);
+    $event->update($data);
+
+    return new EventResource($event);
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(Event $event)
+  {
+    $event->delete();
+  }
 }

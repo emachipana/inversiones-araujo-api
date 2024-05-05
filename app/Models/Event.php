@@ -13,6 +13,7 @@ class Event extends Model
     "name",
     "date",
     "description",
-    "event_type"
+    "event_type",
+    "month"
   ];
 }
