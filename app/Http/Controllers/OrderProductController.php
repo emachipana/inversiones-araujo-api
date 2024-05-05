@@ -17,20 +17,16 @@ class OrderProductController extends Controller
   {
     $data = $request->all();
     $product = Product::findOrFail($data["product_id"]);
+    $sub_total = $data["quantity"] * $product->price;
 
-    if($product->discount) {
-      $sub_total = $data["quantity"] * $product->discount->price;
-    }else {
-      $sub_total = $data["quantity"] * $product->price;
-    }
+    if($product->discount) $sub_total = $data["quantity"] * $product->discount->price;
 
-    return new OrderProductResource(OrderProduct::create([
-      "product_id" => $data["product_id"],
-      "order_id" => $data["order_id"],
-      "quantity" => $data["quantity"],
-      "sub_total" => $sub_total,
-      "product_name" => $product->name
-    ]));
+    $data["sub_total"] = $sub_total;
+    $data["product_name"] = $product->name;
+    $newOrderProduct = OrderProduct::create($data);
+    $newOrderProduct->order->update(["total" => $newOrderProduct->order->total + $sub_total]);
+
+    return new OrderProductResource($newOrderProduct);
   }
 
   /**
@@ -39,17 +35,15 @@ class OrderProductController extends Controller
   public function update(UpdateOrderProductRequest $request, OrderProduct $orderProduct)
   {
     $data = $request->all();
+    $sub_total = $data["quantity"] * $orderProduct->product->price;
 
-    if($orderProduct->product->discount) {
-      $sub_total = $data["quantity"] * $orderProduct->product->discount->price;
-    }else {
-      $sub_total = $data["quantity"] * $orderProduct->product->price;
-    }
+    if($orderProduct->product->discount) $sub_total = $data["quantity"] * $orderProduct->product->discount->price;
+    $data["sub_total"] = $sub_total;
 
-    $orderProduct->update([
-      "quantity" => $data["quantity"],
-      "sub_total" => $sub_total
+    $orderProduct->order->update([
+      "total" => ($orderProduct->order->total - $orderProduct->sub_total) + $sub_total
     ]);
+    $orderProduct->update($data);
 
     return new OrderProductResource($orderProduct);
   }
@@ -59,6 +53,10 @@ class OrderProductController extends Controller
    */
   public function destroy(OrderProduct $orderProduct)
   {
+    $orderProduct->order->update([
+      "total" => $orderProduct->order->total - $orderProduct->sub_total
+    ]);
+
     $orderProduct->delete();
   }
 }

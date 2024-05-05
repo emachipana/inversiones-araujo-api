@@ -21,10 +21,9 @@ class OrderController extends Controller
     $queryItems = $filter->transform($request);
     $orders = Order::where($queryItems)
                 ->with("orderProducts")
-                ->orderBy("created_at", "desc")
-                ->get();
+                ->orderBy("created_at", "desc");
 
-    return new OrderCollection($orders);
+    return new OrderCollection($orders->paginate(18)->appends($request->query()));
   }
 
   /**
@@ -40,7 +39,11 @@ class OrderController extends Controller
    */
   public function store(StoreOrderRequest $request)
   {
-    return new OrderResource(Order::create($request->all()));
+    $data = $request->all();
+    $total = $data["shipping_type"] == "express" ? 12 : 8;
+    $data["total"] = $total;
+
+    return new OrderResource(Order::create($data));
   }
 
   /**
@@ -48,7 +51,16 @@ class OrderController extends Controller
   */
   public function update(UpdateOrderRequest $request, Order $order)
   {
-    $order->update($request->all());
+    $data = $request->all();
+    
+    if(isset($data["shipping_type"])) {
+      $data["total"] = 
+        $order->total
+        - ($data["shipping_type"] == "express" ? 8 : 12)
+        + ($data["shipping_type"] == "express" ? 12 : 8);
+    }
+
+    $order->update($data);
 
     return new OrderResource($order->loadMissing("orderProducts"));
   }

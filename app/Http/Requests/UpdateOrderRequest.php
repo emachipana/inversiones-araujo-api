@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateOrderRequest extends FormRequest
 {
@@ -29,7 +30,8 @@ class UpdateOrderRequest extends FormRequest
         "shipping_type" => ["sometimes" ,"required", "min:3"],
         "pay_type" => ["sometimes" ,"required", "min:3"],
         "destination" => ["sometimes" ,"required", "min:3"],
-        "invoice_id" => ["sometimes"]
+        "invoice_id" => ["sometimes"],
+        "status" => ["required", "sometimes", Rule::in(["pending", "delivered"])]
       ];
     }else { // PUT
       return [
@@ -37,7 +39,8 @@ class UpdateOrderRequest extends FormRequest
         "shipping_type" => ["required", "min:3"],
         "pay_type" => ["required", "min:3"],
         "destination" => ["required", "min:3"],
-        "invoice_id" => ["sometimes"]
+        "invoice_id" => ["sometimes"],
+        "status" => ["required", Rule::in(["pending", "delivered"])]
       ];
     } 
   }
