@@ -10,6 +10,7 @@ class Visit extends Model
   use HasFactory;
 
   protected $fillable = [
+    "month",
     "counter"
   ];
 }
