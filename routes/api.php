@@ -39,7 +39,6 @@ Route::apiResources([
   "users" => UserController::class,
   "events" => EventController::class,
   "orders" => OrderController::class,
-  "messages" => MessageController::class,
   "visits" => VisitController::class
 ]);
 
@@ -58,6 +57,8 @@ Route::apiResource("order_varieties", OrderVarietyController::class)->except(["i
 Route::apiResource("admins", AdminController::class)->only(["update", "show"]);
 
 Route::apiResource("order_products", OrderProductController::class)->except(["index", "show"]);
+
+Route::apiResource("messages", MessageController::class)->except(["update"]);
 
 Route::group(["prefix" => "auth"], function () {
   Route::controller(AuthController::class)->group(function () {

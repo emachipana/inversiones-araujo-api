@@ -2,65 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\MessageFilter;
 use App\Http\Requests\StoreMessageRequest;
-use App\Http\Requests\UpdateMessageRequest;
+use App\Http\Resources\MessageCollection;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
+use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  /**
+   * Display a listing of the resource.
+   */
+  public function index(Request $request)
+  {
+    $filter = new MessageFilter();
+    $queryItems = $filter->transform($request);
+    $messages = Message::where($queryItems)->orderBy("created_at", "desc");
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    return new MessageCollection($messages->paginate(50)->appends($request->all()));
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreMessageRequest $request)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(StoreMessageRequest $request)
+  {
+    return new MessageResource(Message::create($request->all()));
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Message $message)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   */
+  public function show(Message $message)
+  {
+    return new MessageResource($message);
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMessageRequest $request, Message $message)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Message $message)
-    {
-        //
-    }
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(Message $message)
+  {
+    $message->delete();
+  }
 }
