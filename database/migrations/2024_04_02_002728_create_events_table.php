@@ -17,6 +17,7 @@ return new class extends Migration
       $table->dateTime("date");
       $table->text("description");
       $table->string("event_type");
+      $table->string("month");
       $table->timestamps();
     });
   }
