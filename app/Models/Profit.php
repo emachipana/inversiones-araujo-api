@@ -11,7 +11,7 @@ class Profit extends Model
 
   protected $fillable = [
     "month",
-    "expenses",
+    "expense",
     "income",
     "profit",
     "admin_id"
