@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceItemController;
@@ -55,6 +56,8 @@ Route::apiResource("product_images", ProductImageController::class)->except(["in
 Route::apiResource("invoice_items", InvoiceItemController::class)->except(["index", "show"]);
 
 Route::apiResource("order_varieties", OrderVarietyController::class)->except(["index", "show"]);
+
+Route::apiResource("expenses", ExpenseController::class)->except(["index", "show"]);
 
 Route::apiResource("admins", AdminController::class)->only(["update", "show"]);
 

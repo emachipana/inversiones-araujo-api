@@ -13,7 +13,8 @@ class Expense extends Model
     "name",
     "price",
     "quantity",
-    "sub_total"
+    "sub_total",
+    "profit_id"
   ];
 
   public function profit() {
