@@ -2,22 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Http\Requests\StoreVisitRequest;
 use App\Http\Requests\UpdateVisitRequest;
 use App\Http\Resources\VisitCollection;
 use App\Http\Resources\VisitResource;
 use App\Models\Visit;
-use Carbon\Carbon;
 
 class VisitController extends Controller
 {
-  protected function getMonth() {
-    $date = Carbon::now();
-    $month = Carbon::parse($date);
-    $month->locale("es");
-    return $month->translatedFormat("F");
-  }
-
   /**
    * Display a listing of the resource.
    */
@@ -33,12 +26,13 @@ class VisitController extends Controller
    */
   public function store(StoreVisitRequest $request)
   {
-    $month = $this->getMonth();
+    $helper = new Helper();
+    $month = $helper->getMonth();
     $find = Visit::where("month", $month)->first();
 
     if($find) return response()->json(["message" => "El mes ya fue creado"], 422);
 
-    return new VisitResource(Visit::create(["month" => $this->getMonth()]));
+    return new VisitResource(Visit::create(["month" => $month]));
   }
 
   /**
