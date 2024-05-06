@@ -18,7 +18,7 @@ return new class extends Migration
       $table->string("first_name");
       $table->string("last_name");
       $table->string("email");
-      $table->float("collected")->default(0);
+      $table->float("total_profit")->default(0);
       $table->timestamps();
     });
   }

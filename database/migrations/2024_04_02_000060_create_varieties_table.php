@@ -15,7 +15,7 @@ return new class extends Migration
       $table->id();
       $table->string("name");
       $table->float("price");
-      $table->unsignedBigInteger("tuber_id");
+      $table->unsignedBigInteger("tuber_id")->nullable();
       $table->timestamps();
 
       $table->foreign("tuber_id")->references("id")->on("tubers");

@@ -5,14 +5,19 @@ use App\Filters\ApiFilter;
 
 class VitroOrderFilter extends ApiFilter {
   protected $safeParams = [
-    "variety_id" => ["eq"],
     "destination" => ["eq"],
-    "status" => ["eq"]
+    "status" => ["eq"],
+    "init_date" => ["eq", "lt", "lte", "gt", "gte"],
+    "finish_date" => ["eq", "lt", "lte", "gt", "gte"]
   ];
 
   protected $columnMap = [];
 
   protected $operatorMap = [
-    "eq" => "="
+    "eq" => "=",
+    "lt" => "<",
+    "lte" => "<=",
+    "gt" => ">",
+    "gte" => ">="
   ];
 }

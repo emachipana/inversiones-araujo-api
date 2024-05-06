@@ -9,7 +9,8 @@ class ProductFilter extends ApiFilter {
     "max_price" => ["lte", "lt"],
     "category_id" => ["eq"],
     "sub_category_id" => ["eq"],
-    "is_active" => ["eq"]
+    "is_active" => ["eq"],
+    "stock" => ["eq", "gte", "gt", "lte", "lt"]
   ];
 
   protected $columnMap = [

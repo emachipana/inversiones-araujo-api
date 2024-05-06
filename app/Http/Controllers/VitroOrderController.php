@@ -18,10 +18,13 @@ class VitroOrderController extends Controller
   public function index(Request $request)
   {
     $filter = new VitroOrderFilter();
-    $queryItems = $filter->transform($request);
-    $vitroOrders = VitroOrder::where($queryItems)->orderBy("created_at", "desc")->get();
 
-    return new VitroOrderCollection($vitroOrders);
+    $queryItems = $filter->transform($request);
+    $vitroOrders = VitroOrder::where($queryItems)
+                    ->with("orderVarieties")
+                    ->orderBy("created_at", "desc");
+
+    return new VitroOrderCollection($vitroOrders->paginate(18)->appends($request->query()));
   }
 
   /**
@@ -29,14 +32,7 @@ class VitroOrderController extends Controller
    */
   public function store(StoreVitroOrderRequest $request)
   {
-    $data = $request->all();
-    $total = $data["price"] * $data["quantity"];
-    $pending = $total - $data["advance"];
-
-    $data["total"] = $total;
-    $data["pending"] = $pending;
-
-    return new VitroOrderResource(VitroOrder::create($data));
+    return new VitroOrderResource(VitroOrder::create($request->all()));
   }
 
   /**
@@ -44,7 +40,7 @@ class VitroOrderController extends Controller
    */
   public function show(VitroOrder $vitroOrder)
   {
-    return new VitroOrderResource($vitroOrder);
+    return new VitroOrderResource($vitroOrder->loadMissing("orderVarieties"));
   }
 
   /**
@@ -54,13 +50,13 @@ class VitroOrderController extends Controller
   {
     $data = $request->all();
     
-    if($data["advance"]) {
+    if(isset($data["advance"])) {
       $data["pending"] = $vitroOrder->total - $data["advance"];
     }
 
     $vitroOrder->update($data);
 
-    return new VitroOrderResource($vitroOrder);
+    return new VitroOrderResource($vitroOrder->loadMissing("orderVarieties"));
   }
 
   /**
@@ -68,6 +64,7 @@ class VitroOrderController extends Controller
    */
   public function destroy(VitroOrder $vitroOrder)
   {
+    $vitroOrder->orderVarieties()->delete();
     $vitroOrder->delete();
   }
 }

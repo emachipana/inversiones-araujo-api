@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\SubCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use App\Models\SubCategory;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -21,11 +20,11 @@ class CategorySeeder extends Seeder
         "name" => $category
       ]);
 
-      for($i = 1; $i <= 3; $i++) {
-        SubCategory::factory()->create([
-          "category_id" => $newCategory->id
-        ]);
-      }
+      // for($i = 1; $i <= 3; $i++) {
+      //   SubCategory::factory()->create([
+      //     "category_id" => $newCategory->id
+      //   ]);
+      // }
     }
   }
 }

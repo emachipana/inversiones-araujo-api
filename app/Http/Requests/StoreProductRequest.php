@@ -26,7 +26,7 @@ class StoreProductRequest extends FormRequest
       "description" => ["required", "min:10"],
       "price" => ["required", "numeric"],
       "stock" => ["required", "numeric"],
-      "category_id" => ["required"],
+      "category_id" => ["sometimes"],
       "sub_category_id" => ["sometimes"]
     ];
   }

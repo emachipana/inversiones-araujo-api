@@ -14,7 +14,9 @@ class InvoiceItem extends Model
     "product_id",
     "quantity",
     "price",
-    "igv_is_apply"
+    "igv_is_apply",
+    "sub_total",
+    "product_name"
   ];
 
   public function product() {

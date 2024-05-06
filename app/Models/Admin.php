@@ -13,10 +13,15 @@ class Admin extends Model
     "business_description",
     "business_keywords",
     "first_name",
-    "last_name"
+    "last_name",
+    "total_profit"
   ];
 
   public function user() {
     return $this->hasOne(User::class);
+  }
+
+  public function profits() {
+    return $this->hasMany(Profit::class);
   }
 }

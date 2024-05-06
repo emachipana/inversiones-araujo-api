@@ -2,65 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckResetRequest;
 use App\Http\Requests\StoreResetRequest;
-use App\Http\Requests\UpdateResetRequest;
+use App\Http\Resources\ResetResource;
 use App\Models\Reset;
+use Ramsey\Uuid\Uuid;
 
 class ResetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  protected function generateCode() {
+    $uuid = Uuid::uuid4();
+    $code = strtoupper(substr($uuid->toString(), 0, 5));
+    $code = str_replace("-", "", $code);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    return $code;
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreResetRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Reset $reset)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(StoreResetRequest $request)
+  {
+    $data = $request->all();
+    $data["code"] = $this->generateCode();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Reset $reset)
-    {
-        //
-    }
+    return new ResetResource(Reset::create($data));
+  }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateResetRequest $request, Reset $reset)
-    {
-        //
-    }
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(Reset $reset)
+  {
+    $reset->delete();
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Reset $reset)
-    {
-        //
-    }
+  public function check(CheckResetRequest $request, Reset $reset) {
+    $data = $request->all();
+    $response = [
+      "data" => [
+        "is_valid" => false
+      ]
+    ];
+
+    if($data["code"] == $reset->code) $response["data"]["is_valid"] = true;
+  
+    return response()->json($response);
+  }
 }

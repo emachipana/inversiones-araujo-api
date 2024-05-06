@@ -19,7 +19,7 @@ class OrderResource extends JsonResource
       "client" => $this->client,
       "shipping_type" => $this->shipping_type,
       "pay_type" => $this->pay_type,
-      "status" => $this->status,
+      "status" => $this->status ?? "pending",
       "total" => $this->total,
       "invoice" => $this->invoice,
       "destination" => $this->destination,

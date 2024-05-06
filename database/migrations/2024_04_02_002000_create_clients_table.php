@@ -17,9 +17,7 @@ return new class extends Migration
       $table->string("department")->nullable();
       $table->string("city")->nullable();
       $table->integer("phone")->nullable();
-      $table->string("receipt_type")->nullable();
       $table->integer("document")->nullable();
-      $table->string("document_type")->nullable();
       $table->integer("consumption")->default(0);
       $table->string("first_name");
       $table->string("last_name");

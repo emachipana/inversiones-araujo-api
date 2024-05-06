@@ -35,6 +35,6 @@ class VitroOrder extends Model
   }
 
   public function orderVarieties() {
-    return $this->belongsTo(OrderVariety::class);
+    return $this->hasMany(OrderVariety::class);
   } 
 }
