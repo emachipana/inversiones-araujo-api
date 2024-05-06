@@ -13,7 +13,8 @@ class Profit extends Model
     "month",
     "expenses",
     "income",
-    "profit"
+    "profit",
+    "admin_id"
   ];
 
   public function expenses() {

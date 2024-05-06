@@ -14,9 +14,9 @@ return new class extends Migration
     Schema::create('profits', function (Blueprint $table) {
       $table->id();
       $table->string("month");
-      $table->float("expenses");
-      $table->float("income");
-      $table->float("profit");
+      $table->float("expense")->default(0);
+      $table->float("income")->default(0);
+      $table->float("profit")->default(0);
       $table->unsignedBigInteger("admin_id");
       $table->timestamps();
       

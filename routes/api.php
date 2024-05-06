@@ -17,6 +17,7 @@ use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\OrderVarietyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TuberController;
@@ -39,7 +40,8 @@ Route::apiResources([
   "users" => UserController::class,
   "events" => EventController::class,
   "orders" => OrderController::class,
-  "visits" => VisitController::class
+  "visits" => VisitController::class,
+  "profits" => ProfitController::class
 ]);
 
 Route::apiResource("categories", CategoryController::class)->only(["index", "show"]);
