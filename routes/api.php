@@ -28,6 +28,8 @@ use App\Http\Controllers\VisitController;
 use App\Http\Controllers\VitroOrderController;
 use Illuminate\Support\Facades\Route;
 
+Route::get("/products/random", [ProductController::class, "randomProducts"]);
+
 Route::apiResources([
   "sub_categories" => SubCategoryController::class,
   "products" => ProductController::class,

@@ -17,6 +17,12 @@ class ProductController extends Controller
    */
   public function index(Request $request)
   {
+    $search = $request->query("search");
+    if($search) {
+      $products = Product::where("name", "LIKE", "%" . $search . "%")->take(10)->get();
+
+      return new ProductCollection($products);
+    }
     $filter = new ProductFilter();
     $queryItems = $filter->transform($request);
     $products = Product::where($queryItems)
@@ -24,6 +30,13 @@ class ProductController extends Controller
                   ->orderBy("created_at", "desc");
 
     return new ProductCollection($products->paginate(20)->appends($request->query()));
+  }
+
+  public function randomProducts() 
+  {
+    $products = Product::inRandomOrder()->limit(5)->get();
+
+    return new ProductCollection($products);
   }
 
   /**
