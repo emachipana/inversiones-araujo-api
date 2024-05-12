@@ -19,7 +19,7 @@ class ProductController extends Controller
   {
     $search = $request->query("search");
     if($search) {
-      $products = Product::where("name", "LIKE", "%" . $search . "%")->take(10)->get();
+      $products = Product::where("name", "LIKE", "%" . $search . "%")->with("productImages")->take(10)->get();
 
       return new ProductCollection($products);
     }
@@ -34,7 +34,7 @@ class ProductController extends Controller
 
   public function randomProducts() 
   {
-    $products = Product::inRandomOrder()->limit(5)->get();
+    $products = Product::inRandomOrder()->with("productImages")->limit(5)->get();
 
     return new ProductCollection($products);
   }
