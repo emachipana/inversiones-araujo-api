@@ -32,9 +32,10 @@ class ProductController extends Controller
     return new ProductCollection($products->paginate(20)->appends($request->query()));
   }
 
-  public function randomProducts() 
+  public function randomProducts(Request $request) 
   {
-    $products = Product::inRandomOrder()->with("productImages")->limit(5)->get();
+    $limit = $request->query("limit");
+    $products = Product::inRandomOrder()->with("productImages")->limit($limit ?? 5)->get();
 
     return new ProductCollection($products);
   }
