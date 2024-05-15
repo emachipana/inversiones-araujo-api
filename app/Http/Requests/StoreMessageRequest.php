@@ -23,8 +23,7 @@ class StoreMessageRequest extends FormRequest
   public function rules(): array
   {
     return [
-      "first_name" => ["required", "min:3"],
-      "last_name" => ["required", "min:3"],
+      "full_name" => ["required", "min:3"],
       "email" => ["required", "email"],
       "phone" => ["required", "sometimes", "numeric"],
       "subject" => ["required", "min:3"],
