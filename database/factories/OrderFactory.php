@@ -19,7 +19,7 @@ class OrderFactory extends Factory
   {
     return [
       "client_id" => Client::factory(),
-      "shipping_type" => $this->faker->randomElement(["express", "normal", "coordinar"]),
+      "shipping_type" => $this->faker->randomElement(["express", "normal"]),
       "pay_type" => $this->faker->randomElement(["tarjeta", "deposito"]),
       "status" => $this->faker->randomElement(["pending", "delivered"]),
       "total" => $this->faker->randomFloat(1, 20, 900),

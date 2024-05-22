@@ -20,7 +20,7 @@ class MessageController extends Controller
     $queryItems = $filter->transform($request);
     $messages = Message::where($queryItems)->orderBy("created_at", "desc");
 
-    return new MessageCollection($messages->paginate(50)->appends($request->all()));
+    return new MessageCollection($messages->paginate(10)->appends($request->all()));
   }
 
   /**

@@ -21,12 +21,11 @@ class ClientFactory extends Factory
       "department" => $this->faker->state(),
       "city" => $this->faker->city(),
       "phone" => $this->faker->randomNumber(9),
-      "receipt_type" => $this->faker->randomElement(["factura", "boleta"]),
       "document" => $this->faker->randomNumber(8),
-      "document_type" => $this->faker->randomElement(["dni", "ruc"]),
       "first_name" => $this->faker->name(),
       "last_name" => $this->faker->lastName(),
-      "email" => $this->faker->email()
+      "email" => $this->faker->email(),
+      "consumption" => $this->faker->randomFloat(1, 10, 900)
     ];
   }
 }
