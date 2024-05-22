@@ -16,7 +16,7 @@ class OrderSeeder extends Seeder
   {
     $clients = Client::all();
 
-    for($i = 1; $i <= 10; $i++) {
+    for($i = 1; $i <= 50; $i++) {
       $client = $clients->random();
 
       Order::factory()->create([

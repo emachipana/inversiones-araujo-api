@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
    */
   public function run(): void
   {
-    // create user clients
+    //create user clients
 
     // $clients = Client::all();
 

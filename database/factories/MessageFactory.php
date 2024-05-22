@@ -17,12 +17,11 @@ class MessageFactory extends Factory
   public function definition(): array
   {
     return [
-      "first_name" => $this->faker->name(),
-      "last_name" => $this->faker->lastName(),
+      "full_name" => $this->faker->name(),
       "phone" => $this->faker->randomNumber(9),
       "subject" => $this->faker->sentence(),
       "content" => $this->faker->text(),
-      "origin" => $this->faker->randomElement(["agroinvitro", "inversiones_araujo"]),
+      "origin" => $this->faker->randomElement(["agroinvitro", "inversiones"]),
       "email" => $this->faker->email()
     ];
   }

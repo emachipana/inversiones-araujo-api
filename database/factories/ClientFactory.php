@@ -24,7 +24,8 @@ class ClientFactory extends Factory
       "document" => $this->faker->randomNumber(8),
       "first_name" => $this->faker->name(),
       "last_name" => $this->faker->lastName(),
-      "email" => $this->faker->email()
+      "email" => $this->faker->email(),
+      "consumption" => $this->faker->randomFloat(1, 10, 900)
     ];
   }
 }
